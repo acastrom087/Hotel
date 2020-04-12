@@ -5,8 +5,10 @@
  */
 package hotel.gui;
 
+import hotel.entities.Habitacion;
 import java.awt.GridLayout;
 import java.awt.event.HierarchyBoundsListener;
+import java.util.LinkedList;
 import javax.swing.Action;
 import javax.swing.JButton;
 
@@ -16,31 +18,51 @@ import javax.swing.JButton;
  */
 public class Principal extends javax.swing.JFrame {
     private JButton btn;
+    private Habitacion matriz[][];
+    private Habitacion h;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        matriz = new Habitacion[3][3];
         generar();
         
     }
     public void generar(){
-
-        int matriz[][] = new int[6][6];
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
+        
+          
+        for (int f = 0; f < matriz.length; f++) {
+            for (int c = 0; c < matriz[f].length; c++) {
+                 h = new Habitacion();
+                 matriz[f][c] = h;
                  btn = new JButton();
-              
-                GridLayout lal = new  GridLayout(matriz.length,matriz[i].length);
+                 btn.setName(f + ","+ c);
+                GridLayout lal = new  GridLayout(matriz.length,matriz[f].length);
                 jPanel.setLayout(lal);
                 jPanel.add(btn);
+                btn.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt ) {
+                    btnactionPerformed(evt);
+                   
+                    
+                }
+                });
                 
             }
         }
         
     }
 
+    public void btnactionPerformed(java.awt.event.ActionEvent evt){
+                   
+        
+        
+        
+        
+    }
     
     
     
@@ -59,23 +81,15 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel.setLayout(new java.awt.GridLayout());
+        jPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -85,23 +99,19 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(208, 208, 208)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(17, 17, 17)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -110,16 +120,10 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("boton");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
     
-    private void btnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    } 
+    
     
    
     /**
@@ -159,7 +163,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel;
     // End of variables declaration//GEN-END:variables
 }
