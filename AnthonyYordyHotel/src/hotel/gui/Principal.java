@@ -17,7 +17,7 @@ import javax.swing.JButton;
  * @author Castro Mesen
  */
 public class Principal extends javax.swing.JFrame {
-    private JButton btn;
+     
     private Habitacion matriz[][];
     private Habitacion h;
     /**
@@ -31,36 +31,40 @@ public class Principal extends javax.swing.JFrame {
         generar();
         
     }
-    public void generar(){
-        
-          
+    public void generar() {
+
         for (int f = 0; f < matriz.length; f++) {
             for (int c = 0; c < matriz[f].length; c++) {
-                 h = new Habitacion();
-                 matriz[f][c] = h;
-                 btn = new JButton();
-                 btn.setName(f + ","+ c);
-                GridLayout lal = new  GridLayout(matriz.length,matriz[f].length);
+                h = new Habitacion();
+                matriz[f][c] = h;
+                JButton btn;
+                btn = new JButton();
+                btn.setName(f + "," + c);
+                GridLayout lal = new GridLayout(matriz.length, matriz[f].length);
                 jPanel.setLayout(lal);
                 jPanel.add(btn);
                 btn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt ) {
-                    btnactionPerformed(evt);
-                   
-                    
-                }
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        btnactionPerformed(evt, btn);
+
+                    }
                 });
-                
+
             }
         }
-        
+
     }
 
-    public void btnactionPerformed(java.awt.event.ActionEvent evt){
-                   
+    public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
+                System.out.println(btn.getName());
         
         
-        
+    }
+    
+    public void posicion(JButton btn){
+        String[] coordenada = btn.getName().split(",");
+            int fila = Integer.parseInt(coordenada[0]);
+            int columna = Integer.parseInt(coordenada[1]);
         
     }
     
@@ -80,18 +84,10 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel.setLayout(new java.awt.GridLayout(1, 0));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,27 +97,17 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     
@@ -162,7 +148,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotel.entities;
-
+package hotel.bo;
+import hotel.entities.Administrador;
 /**
  *
  * @author HP
  */
-public class Cliente extends Persona{
+public class AdministadorBO {
     
-    
+    public void insertar(Administrador a, String reContra){
+        
+        
+    }
 }
