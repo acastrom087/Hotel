@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package hotel.bo;
+import hotel.dao.AdministadorDAO;
 import hotel.entities.Administrador;
 /**
  *
@@ -11,8 +12,33 @@ import hotel.entities.Administrador;
  */
 public class AdministadorBO {
     
-    public void insertar(Administrador a, String reContra){
+    public boolean insertar(Administrador a, String reContra){
         
+        if (a == null) {
+            throw new RuntimeException("Ingrese un administrador");  
+        }
+        
+        if (Integer.toString(a.getCedula()).isBlank()) {
+            throw new RuntimeException("Debe de ingresar una cedula");
+        }
+        
+        if (a.getNombre().isBlank()) {
+            throw new RuntimeException("Debe de ingresar un nombre");
+        }
+        
+        if (a.getCorreo().isBlank()) {
+            throw new RuntimeException("Debe de ingresar un correo");
+        }
+        
+        if (a.getUsuario().isBlank()) {
+            throw new RuntimeException("Debe de ingresar un usuario");
+        }
+        if (!a.getContrasena().equals(reContra)) {
+            throw new RuntimeException("Las contrasenas no coninciden");
+        }
+        
+        else
+            return new AdministadorDAO().insertar(a);
         
     }
 }
