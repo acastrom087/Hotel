@@ -33,7 +33,7 @@ private HabitacionBO hbo;
     private void llenarTabla(){
         DefaultTableModel modelo =(DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);
-        for (Habitacion[] habitacions : hbo.buscar()) {
+        for (Habitacion h : hbo.buscar()) {
             
         }
     }
