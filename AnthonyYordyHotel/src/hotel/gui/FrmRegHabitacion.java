@@ -5,8 +5,10 @@
  */
 package hotel.gui;
 
+import hotel.bo.HabitacionBO;
 import hotel.entities.Habitacion;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +17,8 @@ import javax.swing.JFrame;
 public class FrmRegHabitacion extends javax.swing.JFrame {
 private JFrame parent;
 private Habitacion matriz[][];
+private HabitacionBO hbo;
+
     /**
      * Creates new form FrmRegHabitacion
      */
@@ -23,6 +27,15 @@ private Habitacion matriz[][];
         this.parent = parent;
         this.matriz = matriz;
         setLocationRelativeTo(parent);
+        hbo = new HabitacionBO();
+    }
+    
+    private void llenarTabla(){
+        DefaultTableModel modelo =(DefaultTableModel) tabla.getModel();
+        modelo.setRowCount(0);
+        for (Habitacion[] habitacions : hbo.buscar()) {
+            
+        }
     }
 
     /**
@@ -48,10 +61,26 @@ private Habitacion matriz[][];
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "habitacion", "id", "Numero", "Tipo", "Precio"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(0);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabla.getColumnModel().getColumn(1).setMinWidth(0);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tabla.getColumnModel().getColumn(1).setMaxWidth(0);
+        }
 
         btnAgregar.setText("Agregar");
 
@@ -79,7 +108,7 @@ private Habitacion matriz[][];
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAgregar)
