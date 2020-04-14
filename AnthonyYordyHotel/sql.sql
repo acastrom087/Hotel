@@ -1,0 +1,16 @@
+CREATE TABLE h.empleado
+(
+id SERIAL PRIMARY KEY,
+cedula INTEGER NOT NULL,
+nombre TEXT NOT NULL,
+correo TEXT NOT NULL,
+usuario TEXT NOT NULL,
+contrasena TEXT NOT NULL,
+tipo TEXT NOT NULL,
+activo BOOLEAN DEFAULT TRUE
+);
+
+
+
+
+

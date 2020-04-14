@@ -5,38 +5,52 @@
  */
 package hotel.gui;
 
+import hotel.entities.Empleado;
 import hotel.entities.Habitacion;
 import java.awt.GridLayout;
 import java.awt.event.HierarchyBoundsListener;
 import java.util.LinkedList;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Castro Mesen
  */
-public class Principal extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
      
     private Habitacion matriz[][];
     private Habitacion h;
+    private JFrame parent;
+    private Empleado e;
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public FrmPrincipal(JFrame parent, Empleado e) {
         initComponents();
         setLocationRelativeTo(null);
-        
+        this.parent = parent;
+        this.e = e;
         matriz = new Habitacion[3][3];
         generar();
+        char admin = 'a';
+            if (e.getTipo() == admin) {
+                FrmRegHabitacion dlg = new FrmRegHabitacion(this, matriz);
+                dlg.pack();
+                dlg.setVisible(true);
+                
+            }
+            setVisible(true);
+            
+        
+        
         
     }
     public void generar() {
 
         for (int f = 0; f < matriz.length; f++) {
             for (int c = 0; c < matriz[f].length; c++) {
-                h = new Habitacion();
-                matriz[f][c] = h;
                 JButton btn;
                 btn = new JButton();
                 btn.setName(f + "," + c);
@@ -56,9 +70,20 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
-                System.out.println(btn.getName());
+                
         
         
+    }
+    
+    public boolean verHabitaciones(){
+        for (int f = 0; f < matriz.length; f++) {
+            for (int c = 0; c < matriz[f].length; c++) {
+                if (matriz[f][c] == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public void posicion(JButton btn){
@@ -85,7 +110,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -115,37 +140,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel;

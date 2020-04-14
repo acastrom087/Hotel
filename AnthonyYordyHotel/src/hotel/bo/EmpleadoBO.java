@@ -4,15 +4,17 @@
  * and open the template in the editor.
  */
 package hotel.bo;
-import hotel.dao.AdministadorDAO;
-import hotel.entities.Administrador;
+import hotel.dao.EmpleadoDAO;
+import hotel.entities.Empleado;
+import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
  * @author HP
  */
-public class AdministadorBO {
+public class EmpleadoBO {
+ 
     
-    public boolean insertar(Administrador a, String reContra){
+    public boolean insertar(Empleado a, String reContra){
         
         if (a == null) {
             throw new RuntimeException("Ingrese un administrador");  
@@ -38,7 +40,23 @@ public class AdministadorBO {
         }
         
         else
-            return new AdministadorDAO().insertar(a);
+            a.setContrasena(DigestUtils.md5Hex(a.getContrasena()));
+            return new EmpleadoDAO().insertar(a);
         
+    }
+
+    public Empleado autenticar(Empleado e){
+        if (e == null) {
+            throw new RuntimeException("Debe ingresar datos");
+        }
+        if (e.getUsuario().trim().isBlank()) {
+            throw  new RuntimeException("Debe de ingresar un usuario");
+        }
+        if (e.getContrasena().isBlank()) {
+            throw new RuntimeException("Debe de ingresar una contraseña");
+            
+        }
+        e.setContrasena(DigestUtils.md5Hex(e.getContrasena()));
+        return new EmpleadoDAO().auntenticar(e);
     }
 }

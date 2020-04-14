@@ -9,16 +9,16 @@ package hotel.entities;
  *
  * @author HP
  */
-public class Administrador extends Persona{
+public class Empleado extends Persona{
     private char tipo;
     private String contrasena;
     private boolean activo;
     private String usuario;
 
-    public Administrador() {
+    public Empleado() {
     }
 
-    public Administrador(char tipo, String contrasena, boolean activo, int id, int cedula, String nombre, String correo, String usuario) {
+    public Empleado(char tipo, String contrasena, boolean activo, int id, int cedula, String nombre, String correo, String usuario) {
         super(id, cedula, nombre, correo);
         this.tipo = tipo;
         this.contrasena = contrasena;
