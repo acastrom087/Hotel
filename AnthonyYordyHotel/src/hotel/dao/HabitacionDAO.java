@@ -18,12 +18,12 @@ import java.util.LinkedList;
  */
 public class HabitacionDAO {
     
-    public LinkedList<Habitacion> seleccionar(String filtro) {
+    public LinkedList<Habitacion> buscar() {
         LinkedList<Habitacion> habitaciones = new LinkedList<>();
 
         try ( Connection con = Conexion.getConexion()) {
-            String sql = "select id,cedula, nombre, apellido_uno, apellido_dos, telefono, genero, estado_civil, direccion, activo from h.habitaciones "
-                    + " order by id";
+            String sql = "select id, capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo from h.habitacion ";
+                    
             PreparedStatement stm = con.prepareStatement(sql);
 //            stm.setString(1, filtro + '%');
 //            stm.setString(2, filtro + '%');
@@ -34,6 +34,7 @@ public class HabitacionDAO {
             }
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new RuntimeException("Favor intente nuevamente");
         }
         return habitaciones;
@@ -42,14 +43,42 @@ public class HabitacionDAO {
     private Habitacion cargar(ResultSet rs) throws SQLException {
         Habitacion h = new Habitacion();
         h.setId(rs.getInt(1));
-        h.setCedula(rs.getString(2));
-        h.setNombre(rs.getString(3));
-        h.setApellidoUno(rs.getString(4));
-        h.setApellidoDos(rs.getString(5));
-        h.setTelefono(rs.getString(6));
-        h.setGenero(rs.getString(7).charAt(0));
+        h.setCapacidadMax(rs.getInt(2));
+        h.setCapacidadMin(rs.getInt(3));
+        h.setTipo(rs.getString(4));
+        h.setPrecioNoche(rs.getInt(5));
+        h.setDisponible(rs.getBoolean(6));
+        h.setActivo(rs.getBoolean(7));
 
-        return e;
+        return h;
     }
+    
+    public boolean insertar(Habitacion h) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " INSERT INTO  h.habitacion(capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo) "
+                    + "VALUES (?, ?, ?, ?, ?, ?) ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, h.getCapacidadMax());
+            stm.setInt(2, h.getCapacidadMin());
+            stm.setString(3, h.getTipo());
+            stm.setInt(4, h.getPrecioNoche());
+            stm.setBoolean(5, h.isDisponible());
+            stm.setBoolean(6, h.isActivo());
+            
+
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = ex.getMessage().contains("unq_usuarios_usuario")
+                    ? "Usuario previamente registrado"
+                    : ex.getMessage().contains("usuarios_correo_key")
+                    ? "Correo previamente registrado"
+                    : "Problemas al registrar el Usuario";
+            ex.printStackTrace();
+            throw new RuntimeException(msj);
+        }
+
+    
+}
     
 }

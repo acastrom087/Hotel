@@ -110,7 +110,7 @@ private EmpleadoBO ebo;
                 txtContrasena.setText("");
                 FrmPrincipal frm = new FrmPrincipal(this, e);
                 frm.pack();
-                frm.setVisible(false);
+                frm.setVisible(true);
                 //setVisible(false);
             }
 

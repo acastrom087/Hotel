@@ -5,6 +5,7 @@
  */
 package hotel.gui;
 
+import hotel.bo.HabitacionBO;
 import hotel.entities.Empleado;
 import hotel.entities.Habitacion;
 import java.awt.GridLayout;
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,29 +26,58 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private Habitacion h;
     private JFrame parent;
     private Empleado e;
+    private int fila2;
+    private int columna2;
+    private HabitacionBO hbo;
     /**
      * Creates new form Principal
      */
     public FrmPrincipal(JFrame parent, Empleado e) {
         initComponents();
         setLocationRelativeTo(null);
+        hbo = new HabitacionBO();
         this.parent = parent;
         this.e = e;
-        matriz = new Habitacion[3][3];
+        fila2 = 2;
+        columna2 = 2;
+        matriz = new Habitacion[fila2][columna2];
         generar();
+        asociarHab();
         char admin = 'a';
             if (e.getTipo() == admin) {
-                FrmRegHabitacion dlg = new FrmRegHabitacion(this, matriz);
+                FrmMantHabitacion dlg = new FrmMantHabitacion(this, matriz, fila2,columna2);
                 dlg.pack();
                 dlg.setVisible(true);
                 
             }
-            setVisible(true);
             
-        
-        
-        
+            
+            
     }
+    
+    
+    public void asociarHab(){
+        try {
+            
+            
+                for (int f = 0; f < matriz.length; f++) {
+                    for (int c = 0; c < matriz[f].length; c++) {
+                        for (Habitacion h : hbo.buscar()) {
+                        matriz[f][c] = h;
+                    }
+                }
+            }
+            
+        }catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+        catch (Exception e) {
+        }
+    }
+            
+            
+            
     public void generar() {
 
         for (int f = 0; f < matriz.length; f++) {
@@ -60,7 +91,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btn.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         btnactionPerformed(evt, btn);
-
+                           //System.out.println(btn.getName());
                     }
                 });
 
@@ -70,7 +101,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
-                
+        
+               String[] coordenada = btn.getName().split(",");
+            int fila = Integer.parseInt(coordenada[0]);
+            int columna = Integer.parseInt(coordenada[1]);
+            System.out.println(fila + "-"+ columna);
+            System.out.println(matriz[fila][columna]);
         
         
     }

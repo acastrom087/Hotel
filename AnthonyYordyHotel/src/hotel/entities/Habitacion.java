@@ -16,15 +16,16 @@ public class Habitacion {
     private int id;
     private int capacidadMax;
     private int capacidadMin;
-    private char tipo;
-    private double precioNoche;
+    private String tipo;
+    private int precioNoche;
     private boolean disponible;
     private boolean activo;
+    private Empleado empleado;
 
     public Habitacion() {
     }
 
-    public Habitacion(int id, int capacidadMax, int capacidadMin, char tipo, double precioNoche, boolean disponible, boolean activo) {
+    public Habitacion(int id, int capacidadMax, int capacidadMin, String tipo, int precioNoche, boolean disponible, boolean activo, Empleado empleado) {
         this.id = id;
         this.capacidadMax = capacidadMax;
         this.capacidadMin = capacidadMin;
@@ -32,6 +33,19 @@ public class Habitacion {
         this.precioNoche = precioNoche;
         this.disponible = disponible;
         this.activo = activo;
+        this.empleado = empleado;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     
@@ -57,19 +71,19 @@ public class Habitacion {
         this.capacidadMin = capacidadMin;
     }
 
-    public char getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
-    public double getPrecioNoche() {
+    public int getPrecioNoche() {
         return precioNoche;
     }
 
-    public void setPrecioNoche(double precioNoche) {
+    public void setPrecioNoche(int precioNoche) {
         this.precioNoche = precioNoche;
     }
 
