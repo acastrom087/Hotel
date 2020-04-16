@@ -93,7 +93,7 @@ private EmpleadoBO ebo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblSigInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSigInMouseClicked
-        DlgRegistrarse dlg = new DlgRegistrarse(this, true);
+        DlgRegistrarse dlg = new DlgRegistrarse(this, true, null);
         dlg.pack();
         dlg.setVisible(true);
         

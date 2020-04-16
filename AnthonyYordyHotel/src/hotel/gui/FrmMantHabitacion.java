@@ -6,6 +6,7 @@
 package hotel.gui;
 
 import hotel.bo.HabitacionBO;
+import hotel.entities.Empleado;
 import hotel.entities.Habitacion;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -21,12 +22,12 @@ private HabitacionBO hbo;
 private int fila;
 private int columna;
 private int indice;
-
+private Empleado e;
 
     /**
      * Creates new form FrmRegHabitacion
      */
-    public FrmMantHabitacion(JFrame parent, Habitacion matriz[][], int fila, int columna) {
+    public FrmMantHabitacion(JFrame parent, Habitacion matriz[][], int fila, int columna,Empleado e ) {
         initComponents();
         this.parent = parent;
         this.matriz = matriz;
@@ -35,6 +36,7 @@ private int indice;
         setLocationRelativeTo(parent);
         hbo = new HabitacionBO();
         llenarTabla();
+        this.e = e;
         
     }
     
@@ -70,6 +72,7 @@ private int indice;
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -121,6 +124,15 @@ private int indice;
         });
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Agregar Recepcionista");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -179,6 +191,12 @@ private int indice;
         llenarTabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        DlgRegistrarse dlg = new DlgRegistrarse(this, true, e);
+        dlg.pack();
+        dlg.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,6 +210,7 @@ private int indice;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

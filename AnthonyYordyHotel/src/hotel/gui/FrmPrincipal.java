@@ -9,12 +9,11 @@ import hotel.bo.HabitacionBO;
 import hotel.entities.Empleado;
 import hotel.entities.Habitacion;
 import java.awt.GridLayout;
-import java.awt.event.HierarchyBoundsListener;
-import java.util.LinkedList;
-import javax.swing.Action;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,72 +40,43 @@ public class FrmPrincipal extends javax.swing.JFrame {
         fila2 = 2;
         columna2 = 2;
         matriz = new Habitacion[fila2][columna2];
-        generar();
-        asociarHab();
+        crearBotones();
+        System.out.println(verFecha());
         char admin = 'a';
-            if (e.getTipo() == admin) {
-                FrmMantHabitacion dlg = new FrmMantHabitacion(this, matriz, fila2,columna2);
+            if (e.getTipo() == admin ) {
+                FrmMantHabitacion dlg = new FrmMantHabitacion(this, matriz, fila2,columna2, e);
                 dlg.pack();
                 dlg.setVisible(true);
                 
-            }
-            
-            
-            
+            }   
     }
     
     
-    public void asociarHab(){
-        try {
-            
-            
-                for (int f = 0; f < matriz.length; f++) {
-                    for (int c = 0; c < matriz[f].length; c++) {
-                        for (Habitacion h : hbo.buscar()) {
-                        matriz[f][c] = h;
-                    }
-                }
-            }
-            
-        }catch (RuntimeException ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        
-        catch (Exception e) {
-        }
+    private LocalDate verFecha(){
+        LocalDate fecha = LocalDate.now();
+        return fecha;
     }
+    
             
             
             
-    public void generar() {
-
-        for (int f = 0; f < matriz.length; f++) {
-            for (int c = 0; c < matriz[f].length; c++) {
-                JButton btn;
-                btn = new JButton();
-                btn.setName(f + "," + c);
-                GridLayout lal = new GridLayout(matriz.length, matriz[f].length);
-                jPanel.setLayout(lal);
-                jPanel.add(btn);
-                btn.addActionListener(new java.awt.event.ActionListener() {
+    public void crearBotones(){
+        jPanel.setLayout(new GridLayout(fila2, columna2));
+        for (int i = 0; i < (fila2*columna2); i++) {
+            JButton btn = new JButton("#"+ (i+1));
+            btn.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         btnactionPerformed(evt, btn);
-                           //System.out.println(btn.getName());
+                           
                     }
                 });
-
-            }
+            jPanel.add(btn);
         }
-
     }
 
     public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
         
-               String[] coordenada = btn.getName().split(",");
-            int fila = Integer.parseInt(coordenada[0]);
-            int columna = Integer.parseInt(coordenada[1]);
-            System.out.println(fila + "-"+ columna);
-            System.out.println(matriz[fila][columna]);
+                System.out.println(btn.getText());
         
         
     }

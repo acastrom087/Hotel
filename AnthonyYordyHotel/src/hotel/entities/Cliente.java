@@ -10,6 +10,25 @@ package hotel.entities;
  * @author HP
  */
 public class Cliente extends Persona{
+    private int celular;
+
+    public Cliente() {
+    }
+
+    public Cliente(int celular, int id, int cedula, String nombre, String correo) {
+        super(id, cedula, nombre, correo);
+        this.celular = celular;
+    }
+
+    public int getCelular() {
+        return celular;
+    }
+
+    public void setCelular(int celular) {
+        this.celular = celular;
+    }
+    
+    
     
     
 }

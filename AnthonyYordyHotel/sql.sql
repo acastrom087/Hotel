@@ -21,6 +21,40 @@ disponible BOOLEAN NOT NULL,
 activo BOOLEAN NOT NULL
 );
 
+CREATE TABLE h.cliente
+(
+id SERIAL PRIMARY KEY,
+cedula INT NOT NULL UNIQUE,
+nombre TEXT NOT NULL,
+celular INT NOT NULL,
+correo TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE h.reserva
+(
+id SERIAL PRIMARY KEY,
+fecha_entrada DATE NOT NULL,
+fecha_salida DATE NOT NULL,
+id_cliente INT NOT NULL,
+id_habitacion INT NOT NULL,
+id_empleado INT NOT NULL
+);
+
+
+ALTER TABLE h.reserva
+ADD FOREIGN KEY (id_cliente)
+REFERENCES h.cliente(id),
+ADD FOREIGN KEY (id_habitacion)
+REFERENCES h.habitacion(id),
+ADD FOREIGN KEY (id_empleado)
+REFERENCES h.empleado(id)
+
+
+select * from h.cliente
+where nombre like 'an%' or cedula = '204250348'
+
+drop table h.cliente
+
 INSERT INTO h.habitacion (capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo)
 VALUES (
 		'6',
@@ -32,6 +66,9 @@ VALUES (
 );
 select* 
 from h.habitacion
+
+select* 
+from h.empleado
 
 delete from h.habitacion where id = 25
 

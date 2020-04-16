@@ -13,14 +13,15 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class DlgRegistrarse extends javax.swing.JDialog {
-    
+private Empleado e;
     /**
      * Creates new form DlgRegistrarse
      */
-    public DlgRegistrarse(java.awt.Frame parent, boolean modal) {
+    public DlgRegistrarse(java.awt.Frame parent, boolean modal, Empleado e) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        this.e = e;
     }
 
     /**
@@ -145,7 +146,10 @@ public class DlgRegistrarse extends javax.swing.JDialog {
         a.setCorreo(txtCorreo.getText());
         a.setUsuario(txtUsuario.getText());
         a.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
-        a.setTipo('a');
+        if (e == null) {
+            a.setTipo('a');
+        }
+        a.setTipo('r');
         String reContra = String.valueOf(txtReContra.getPassword()).trim();
         
         try {
