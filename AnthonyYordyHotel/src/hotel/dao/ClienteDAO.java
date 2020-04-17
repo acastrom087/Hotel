@@ -23,12 +23,12 @@ public class ClienteDAO {
         LinkedList<Cliente> clientes = new LinkedList<>();
 
         try ( Connection con = Conexion.getConexion()) {
-            String sql = " select id,cedula,nombre,celular,correo from h.cliente " +
-                            "where lower(nombre) like lower(?) or cedula = ? ";
+            String sql = " select id,cedula,nombre,celular,correo from h.cliente "+
+                            " where lower(nombre) like lower(?)  ";
                     
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, filtro + '%');
-            stm.setString(2, filtro + '%');
+           // stm.setString(2, filtro + '%');
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

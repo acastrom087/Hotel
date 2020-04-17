@@ -107,11 +107,18 @@ private EmpleadoBO ebo;
             e = ebo.autenticar(e);
             char admin = 'a';
             if (e.getTipo() == admin ) {
+                System.out.println(e.getTipo());
+                txtUsuario.setText("");
+                txtContrasena.setText("");
                 FrmMantHabitacion dlg = new FrmMantHabitacion(this, e);
                 dlg.pack();
                 dlg.setVisible(true);
+                
+                
+                
             } 
             if (e != null) {
+                System.out.println(e.getTipo());
                 txtUsuario.setText("");
                 txtContrasena.setText("");
                 FrmPrincipal frm = new FrmPrincipal(this, e);

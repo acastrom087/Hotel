@@ -60,7 +60,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         for(Habitacion h : hab) {
             JButton btn = new JButton("#"+h.getId());
             btn.setName("btn,"+h.getId());
-            btn.setBackground(h.getTipo().equalsIgnoreCase("doble") ? Color.BLUE : Color.WHITE);
+            if (h.getTipo().equals("Doble")) {
+                btn.setBackground(Color.RED);
+            }if (h.getTipo().equals("Matrimonial")) {
+                btn.setBackground(Color.WHITE);
+            }if (h.getTipo().equals("Sencilla")) {
+                btn.setBackground(Color.BLUE);
+            }if (h.getTipo().trim().equalsIgnoreCase("Suite Junior")) {
+                btn.setBackground(Color.GREEN);
+            }if (h.getTipo().trim().equalsIgnoreCase("Suite Doble")) {
+                btn.setBackground(Color.ORANGE);
+            }if (h.getTipo().equalsIgnoreCase("Suite Presidencial")) {
+                System.out.println(h.getTipo().trim());
+                btn.setBackground(Color.YELLOW);
+            }
+            
+            //Sencilla, Doble, Matrimonial, Suite Junior, Suite Doble, Suite Presidencial
+            //btn.setBackground(h.getTipo().equalsIgnoreCase("doble") ? Color.BLUE : Color.WHITE);
             btn.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         btnactionPerformed(evt, btn);                         

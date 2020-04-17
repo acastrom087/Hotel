@@ -5,7 +5,10 @@
  */
 package hotel.gui;
 
+import hotel.bo.ClienteBO;
+import hotel.entities.Cliente;
 import hotel.entities.Empleado;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -16,6 +19,8 @@ public class FrmReserva extends javax.swing.JFrame {
 private JFrame parent;
 private Empleado e;
 private int id;
+private ClienteBO cbo;
+private final DefaultListModel<String> modelo;
     /**
      * Creates new form FrmReserva
      */
@@ -25,6 +30,16 @@ private int id;
         this.parent = parent;
         this.id = id;
         this.e = e;
+        cbo = new ClienteBO();
+        modelo = new DefaultListModel<>();
+        lista.setModel(modelo);
+        llenarLista();
+    }
+    
+    private void llenarLista(){
+        for (Cliente c : cbo.buscar("")) {
+            modelo.addElement(c.getNombre());
+        }
     }
 
     /**
@@ -40,14 +55,14 @@ private int id;
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lista = new javax.swing.JList<>();
         txtFechaEntrada = new javax.swing.JFormattedTextField();
         txtFechaSalida = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Fecha de entrada:");
 
@@ -55,7 +70,7 @@ private int id;
 
         jLabel3.setText("Cliente:");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lista);
 
         try {
             txtFechaEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -125,7 +140,7 @@ private int id;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     /**
      * @param args the command line arguments
      */
@@ -138,8 +153,8 @@ private int id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lista;
     private javax.swing.JFormattedTextField txtFechaEntrada;
     private javax.swing.JFormattedTextField txtFechaSalida;
     // End of variables declaration//GEN-END:variables

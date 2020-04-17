@@ -51,7 +51,7 @@ REFERENCES h.empleado(id)
 
 
 select * from h.cliente
-where nombre like 'an%' or cedula = '204250348'
+where lower(nombre) like lower('%') or cedula = '204250348'
 
 drop table h.cliente
 
