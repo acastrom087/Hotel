@@ -105,14 +105,21 @@ private EmpleadoBO ebo;
             e.setUsuario(txtUsuario.getText());
             e.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
             e = ebo.autenticar(e);
+            char admin = 'a';
+            if (e.getTipo() == admin ) {
+                FrmMantHabitacion dlg = new FrmMantHabitacion(this, e);
+                dlg.pack();
+                dlg.setVisible(true);
+            } 
             if (e != null) {
                 txtUsuario.setText("");
                 txtContrasena.setText("");
                 FrmPrincipal frm = new FrmPrincipal(this, e);
                 frm.pack();
                 frm.setVisible(true);
-                //setVisible(false);
+                
             }
+            
 
         } catch (RuntimeException ex) {
             ex.printStackTrace();

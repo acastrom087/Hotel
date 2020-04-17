@@ -8,10 +8,12 @@ package hotel.gui;
 import hotel.bo.HabitacionBO;
 import hotel.entities.Empleado;
 import hotel.entities.Habitacion;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -39,16 +41,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.e = e;
         fila2 = 2;
         columna2 = 2;
-        matriz = new Habitacion[fila2][columna2];
         crearBotones();
-        System.out.println(verFecha());
-        char admin = 'a';
-            if (e.getTipo() == admin ) {
-                FrmMantHabitacion dlg = new FrmMantHabitacion(this, matriz, fila2,columna2, e);
-                dlg.pack();
-                dlg.setVisible(true);
-                
-            }   
+        
+          
     }
     
     
@@ -57,17 +52,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         return fecha;
     }
     
-            
-            
+                
             
     public void crearBotones(){
         jPanel.setLayout(new GridLayout(fila2, columna2));
-        for (int i = 0; i < (fila2*columna2); i++) {
-            JButton btn = new JButton("#"+ (i+1));
+        LinkedList<Habitacion> hab = hbo.buscar();
+        for(Habitacion h : hab) {
+            JButton btn = new JButton("#"+h.getId());
+            btn.setName("btn,"+h.getId());
+            btn.setBackground(h.getTipo().equalsIgnoreCase("doble") ? Color.BLUE : Color.WHITE);
             btn.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        btnactionPerformed(evt, btn);
-                           
+                        btnactionPerformed(evt, btn);                         
                     }
                 });
             jPanel.add(btn);
@@ -75,11 +71,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
-        
-                System.out.println(btn.getText());
-        
-        
-    }
+        int id = Integer.parseInt(btn.getName().split(",")[1]);
+        FrmReserva frm = new FrmReserva(this,id, e);
+        frm.pack();
+        frm.setVisible(true);
+;    }
     
     public boolean verHabitaciones(){
         for (int f = 0; f < matriz.length; f++) {
@@ -140,7 +136,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    
+    public static void main(String[] args) {
+        new FrmPrincipal(null, new Empleado()).setVisible(true);
+    }
     
    
     /**

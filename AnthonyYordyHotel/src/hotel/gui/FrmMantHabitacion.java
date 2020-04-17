@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmMantHabitacion extends javax.swing.JFrame {
 private JFrame parent;
-private Habitacion matriz[][];
 private HabitacionBO hbo;
 private int fila;
 private int columna;
@@ -27,12 +26,10 @@ private Empleado e;
     /**
      * Creates new form FrmRegHabitacion
      */
-    public FrmMantHabitacion(JFrame parent, Habitacion matriz[][], int fila, int columna,Empleado e ) {
+    public FrmMantHabitacion(JFrame parent,Empleado e ) {
         initComponents();
         this.parent = parent;
-        this.matriz = matriz;
-        this.fila = fila;
-        this.columna = columna;
+        
         setLocationRelativeTo(parent);
         hbo = new HabitacionBO();
         llenarTabla();
