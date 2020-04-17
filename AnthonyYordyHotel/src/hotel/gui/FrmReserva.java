@@ -158,7 +158,7 @@ private final DefaultListModel<Cliente> modelo;
             r.setFecha_entrada(LocalDate.parse(txtFechaEntrada.getText(), DateTimeFormatter.ofPattern("dd,MM,yyyy")));
             r.setFecha_salida(LocalDate.parse(txtFechaSalida.getText(), DateTimeFormatter.ofPattern("dd,MM,yyyy")));
             Cliente c = new Cliente();
-            c= lista.getSelectedValue();
+            c = lista.getSelectedValue();
             
             if (new ReservaBO().insertar(r ,c ,id, e) ) {
                 JOptionPane.showMessageDialog(this, "Reserva hecha");

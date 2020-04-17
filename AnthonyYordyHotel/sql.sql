@@ -66,6 +66,8 @@ VALUES (
 );
 select* 
 from h.habitacion
+select*
+from h.reserva
 
 select* 
 from h.empleado
