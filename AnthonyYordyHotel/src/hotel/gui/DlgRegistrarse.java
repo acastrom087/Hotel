@@ -149,7 +149,10 @@ private Empleado e;
         if (e == null) {
             a.setTipo('a');
         }
+        else{
         a.setTipo('r');
+        }
+        
         String reContra = String.valueOf(txtReContra.getPassword()).trim();
         
         try {

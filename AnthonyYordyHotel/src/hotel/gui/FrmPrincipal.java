@@ -75,8 +75,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btn.setBackground(Color.YELLOW);
             }
             
-            //Sencilla, Doble, Matrimonial, Suite Junior, Suite Doble, Suite Presidencial
-            //btn.setBackground(h.getTipo().equalsIgnoreCase("doble") ? Color.BLUE : Color.WHITE);
             btn.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         btnactionPerformed(evt, btn);                         

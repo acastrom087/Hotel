@@ -6,10 +6,16 @@
 package hotel.gui;
 
 import hotel.bo.ClienteBO;
+import hotel.bo.HabitacionBO;
+import hotel.bo.ReservaBO;
 import hotel.entities.Cliente;
 import hotel.entities.Empleado;
+import hotel.entities.Reserva;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +26,7 @@ private JFrame parent;
 private Empleado e;
 private int id;
 private ClienteBO cbo;
-private final DefaultListModel<String> modelo;
+private final DefaultListModel<Cliente> modelo;
     /**
      * Creates new form FrmReserva
      */
@@ -38,7 +44,7 @@ private final DefaultListModel<String> modelo;
     
     private void llenarLista(){
         for (Cliente c : cbo.buscar("")) {
-            modelo.addElement(c.getNombre());
+            modelo.addElement(c);
         }
     }
 
@@ -87,6 +93,11 @@ private final DefaultListModel<String> modelo;
         jButton1.setText("Agregar");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Editar");
 
@@ -140,6 +151,28 @@ private final DefaultListModel<String> modelo;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Reserva r = new Reserva();
+            r.setFecha_entrada(LocalDate.parse(txtFechaEntrada.getText(), DateTimeFormatter.ofPattern("dd,MM,yyyy")));
+            r.setFecha_salida(LocalDate.parse(txtFechaSalida.getText(), DateTimeFormatter.ofPattern("dd,MM,yyyy")));
+            Cliente c = new Cliente();
+            c= lista.getSelectedValue();
+            
+            if (new ReservaBO().insertar(r ,c ,id, e) ) {
+                JOptionPane.showMessageDialog(this, "Reserva hecha");
+            }
+            
+            
+        }catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Intente nuevamente");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -154,7 +187,7 @@ private final DefaultListModel<String> modelo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lista;
+    private javax.swing.JList<Cliente> lista;
     private javax.swing.JFormattedTextField txtFechaEntrada;
     private javax.swing.JFormattedTextField txtFechaSalida;
     // End of variables declaration//GEN-END:variables
