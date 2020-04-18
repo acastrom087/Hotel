@@ -61,7 +61,7 @@ public class EmpleadoDAO {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new RuntimeException("Favor intente nuevamente");
+            throw new RuntimeException("Problemas con la base de datos");
         }
         return null;
     }
@@ -78,5 +78,23 @@ public class EmpleadoDAO {
         e.setActivo(rs.getBoolean(8));
       
         return e;
+    }
+    
+    public Empleado cargarID(int id) {
+        try ( Connection con = Conexion.getConexion()) {
+            String sql = " select id, cedula, nombre, correo, usuario, contrasena, tipo, activo from h.empleado "
+                    + " where id = ? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return cargar(rs);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException("Favor intente nuevamente");
+        }
+        return null;
     }
 }

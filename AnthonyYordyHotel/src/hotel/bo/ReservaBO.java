@@ -11,6 +11,7 @@ import hotel.entities.Empleado;
 import hotel.entities.Reserva;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
+import java.util.LinkedList;
 
 /**
  *
@@ -32,4 +33,14 @@ public class ReservaBO {
         }
         return new ReservaDAO().insertar(r, c, id, e);
     }
+
+    public LinkedList<Reserva> cargar() {
+            return new ReservaDAO().cargar();
+    }
+
+    public LinkedList<Reserva> ocupados() {
+        
+            return new ReservaDAO().ocupados();
+    }
+    
 }

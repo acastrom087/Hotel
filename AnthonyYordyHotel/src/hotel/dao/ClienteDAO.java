@@ -78,7 +78,26 @@ public class ClienteDAO {
             ex.printStackTrace();
             throw new RuntimeException(msj);
         }
-
     
-}
+}       
+        public Cliente cargarID(int id) {
+        try ( Connection con = Conexion.getConexion()) {
+            String sql = " select id,cedula,nombre,celular,correo from h.cliente "+
+                            " where id =? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return cargar(rs);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException("Favor intente nuevamente");
+        }
+        return null;
+    }
+    
+    
+    
 }
