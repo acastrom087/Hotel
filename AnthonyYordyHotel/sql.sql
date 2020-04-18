@@ -59,15 +59,62 @@ INSERT INTO h.habitacion (capacidad_max, capacidad_min, tipo, precio_noche, disp
 VALUES (
 		'6',
 		'2',
-		'matrimonial',
+		'Matrimonial',
+		'15000',
+		'true',
+		'true');
+INSERT INTO h.habitacion (capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo)
+VALUES (
+		'4',
+		'2',
+		'Doble',
+		'10000',
+		'true',
+		'true');
+INSERT INTO h.habitacion (capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo)
+VALUES (
+		'2',
+		'2',
+		'Sencilla',
+		'12000',
+		'true',
+		'true');
+INSERT INTO h.habitacion (capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo)
+VALUES (
+		'6',
+		'2',
+		'suite presidencial',
 		'10000',
 		'true',
 		'true'
 );
+
+INSERT INTO h.cliente (cedula,nombre,celular,correo)
+VALUES(
+		'207840734',
+		'Anthony',
+		'84203507',
+		'acastrom087gmail.com'
+);
+
+INSERT INTO h.cliente (cedula,nombre,celular,correo)
+VALUES(
+		'204250348',
+		'Marielos',
+		'89850708',
+		'acastrom087gmail.com'
+);
+
+
+SELECT *
+FROM h.cliente
+
 select* 
 from h.habitacion
+
 select*
 from h.reserva
+where fecha_salida = between
 
 select* 
 from h.empleado
@@ -75,8 +122,15 @@ from h.empleado
 delete from h.habitacion where id = 25
 
 UPDATE h.empleado
-set tipo = 'e'
-WHERE id =2
+set tipo = 'a'
+WHERE id =1
+
+select r.*, c.nombre, e.nombre
+FROM h.reserva r
+join h.cliente c
+on r.id_cliente = c.id
+join h.empleado e
+on e.id = r.id_empleado
 
 
 
