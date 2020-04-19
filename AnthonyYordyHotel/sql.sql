@@ -119,7 +119,7 @@ where fecha_salida = between
 select* 
 from h.empleado
 
-delete from h.habitacion where id = 25
+delete from h.reserva where id = 2
 
 UPDATE h.empleado
 set tipo = 'a'

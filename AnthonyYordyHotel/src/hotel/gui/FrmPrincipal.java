@@ -62,9 +62,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         int numero = 1;
         jPanel.setLayout(new GridLayout(fila2, columna2));
         LinkedList<Habitacion> hab = hbo.buscar();
-        for (Reserva r : new ReservaBO().ocupados()) {
-                System.out.println(r.getCliente());
-            }
         for(Habitacion h : hab) {
             JButton btn = new JButton("#"+numero);
             numero++;
@@ -82,6 +79,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btn.setBackground(Color.ORANGE);
             }if (h.getTipo().equalsIgnoreCase("Suite Presidencial")) {
                 btn.setBackground(Color.YELLOW);
+            }
+            for (Reserva r : new ReservaBO().ocupados()) {
+                if (id == r.getHabitacion().getId()) {
+                    System.out.println(r.getCliente());
+                    btn.setBackground(Color.BLACK);
+                }
             }
             
             
