@@ -18,7 +18,9 @@ import java.util.LinkedList;
  * @author HP
  */
 public class ReservaBO {
+    
     public boolean insertar(Reserva r, Cliente c, int id, Empleado e){
+        LinkedList<Reserva> list = new ReservaDAO().cargar();
         if (c == null) {
             throw new RuntimeException("Necesita un usuario ");
         }
@@ -30,6 +32,27 @@ public class ReservaBO {
         }
         if (r.getFecha_entrada().isBefore(LocalDate.now())) {
             throw new RuntimeException("La fecha debe ser actual o a futuro");
+        }
+        if (list != null) {
+            
+        
+        for (Reserva rh : list) {
+            
+            if (rh.getHabitacion().getId() == id) {
+                if (r.getFecha_entrada().isAfter(rh.getFecha_entrada()) && r.getFecha_entrada().isBefore(rh.getFecha_salida())) {
+                    throw new RuntimeException("Las fechas ingresadas no estan disponibles");
+                }
+                if (r.getFecha_entrada().isEqual(rh.getFecha_entrada())) {
+                    throw new RuntimeException("Las fechas ingresadas no estan disponibles");
+                }
+                if (r.getFecha_salida().isAfter(rh.getFecha_entrada())&& r.getFecha_salida().isBefore(rh.getFecha_salida())) {
+                    throw new RuntimeException("Las fechas ingresadas no estan disponibles");
+                }
+                if (r.getFecha_entrada().isBefore(rh.getFecha_entrada())&& r.getFecha_salida().isAfter(rh.getFecha_salida())) {
+                    throw new RuntimeException("Las fecha ingresadas no estan disponibles");
+                }
+            }
+        }
         }
         return new ReservaDAO().insertar(r, c, id, e);
     }

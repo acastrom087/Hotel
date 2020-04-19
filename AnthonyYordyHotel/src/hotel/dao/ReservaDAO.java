@@ -26,7 +26,7 @@ public class ReservaDAO {
     public boolean insertar(Reserva r, Cliente c, int id, Empleado e) {
         try ( java.sql.Connection con = Conexion.getConexion()) {
             String sql = " INSERT INTO  h.reserva(fecha_entrada, fecha_salida, id_cliente, id_habitacion, id_empleado) "
-                    + "VALUES (?, ?, ?, ?, ?) ";
+                    + " VALUES (?, ?, ?, ?, ?) ";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setDate(1,Date.valueOf(r.getFecha_entrada()));
             stm.setDate(2,Date.valueOf(r.getFecha_salida()));

@@ -82,7 +82,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
             for (Reserva r : new ReservaBO().ocupados()) {
                 if (id == r.getHabitacion().getId()) {
-                    System.out.println(r.getCliente());
                     btn.setBackground(Color.BLACK);
                 }
             }
