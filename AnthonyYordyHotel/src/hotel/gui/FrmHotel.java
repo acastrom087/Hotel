@@ -24,19 +24,19 @@ import javax.swing.JFrame;
  *
  * @author Castro Mesen
  */
-public class FrmPrincipal extends javax.swing.JFrame {
+public class FrmHotel extends javax.swing.JFrame {
      
     private Habitacion matriz[][];
     private Habitacion h;
-    private JFrame parent;
-    private Empleado e;
-    private int fila2;
-    private int columna2;
-    private HabitacionBO hbo;
+    private final JFrame parent;
+    private final Empleado e;
+    private final int fila2;
+    private final int columna2;
+    private final HabitacionBO hbo;
     /**
      * Creates new form Principal
      */
-    public FrmPrincipal(JFrame parent, Empleado e) {
+    public FrmHotel(JFrame parent, Empleado e) {
         initComponents();
         setLocationRelativeTo(null);
         hbo = new HabitacionBO();
@@ -46,8 +46,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         columna2 = 2;
         crearBotones();
         txtFechaActual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM 'de' y")));
-        
-          
     }
     
     
@@ -61,7 +59,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void crearBotones(){
         int numero = 1;
         jPanel.setLayout(new GridLayout(fila2, columna2));
-        LinkedList<Habitacion> hab = hbo.buscar();
+        LinkedList<Habitacion> hab = hbo.buscar("");
         for(Habitacion h : hab) {
             JButton btn = new JButton("#"+numero);
             numero++;
@@ -83,6 +81,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             for (Reserva r : new ReservaBO().ocupados()) {
                 if (id == r.getHabitacion().getId()) {
                     btn.setBackground(Color.BLACK);
+                    
                 }
             }
             
@@ -98,28 +97,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public void btnactionPerformed(java.awt.event.ActionEvent evt, JButton btn){
         int id = Integer.parseInt(btn.getName().split(",")[1]);
-        FrmReserva frm = new FrmReserva(this,id, e);
+        FrmMantReserva frm = new FrmMantReserva(this,id, e);
         frm.pack();
         frm.setVisible(true);
-;    }
+        setVisible(false);
+   }
     
-    public boolean verHabitaciones(){
-        for (int f = 0; f < matriz.length; f++) {
-            for (int c = 0; c < matriz[f].length; c++) {
-                if (matriz[f][c] == null) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     
-    public void posicion(JButton btn){
-        String[] coordenada = btn.getName().split(",");
-            int fila = Integer.parseInt(coordenada[0]);
-            int columna = Integer.parseInt(coordenada[1]);
-        
-    }
+    
+    
     
     
     
@@ -141,6 +127,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtFechaActual = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel.setBorder(new javax.swing.border.MatteBorder(null));
         jPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,16 +149,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
-                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(txtFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,9 +167,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
-                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
 
         pack();
@@ -187,10 +178,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void txtFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActualActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
     
-    public static void main(String[] args) {
-        new FrmPrincipal(null, new Empleado()).setVisible(true);
-    }
+    
     
    
     /**

@@ -45,16 +45,19 @@ public class ReservaDAO {
         }
     }
 
-    public LinkedList<Reserva> cargar() {
+    public LinkedList<Reserva> cargar(String filtro) {
         LinkedList<Reserva> reserva = new LinkedList<>();
 
         try ( Connection con = Conexion.getConexion()) {
-            String sql = " select id, fecha_entrada, fecha_salida, id_cliente, id_habitacion, id_empleado "
-                    +      "from h.reserva ";
+            String sql = " select r.id, r.fecha_entrada, r.fecha_salida, r.id_cliente, r.id_habitacion, r.id_empleado "
+                    +    " from h.reserva r "
+                    +    " join h.cliente c"
+                    +    " on r.id_cliente = c.id "
+                    +    " where lower(c.nombre) like lower(?)";
                     
             PreparedStatement stm = con.prepareStatement(sql);
-//            stm.setString(1, filtro + '%');
-//            stm.setString(2, filtro + '%');
+            stm.setString(1, filtro + '%');
+
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -103,6 +106,24 @@ public class ReservaDAO {
             throw new RuntimeException("Favor intente nuevamente");
         }
         return reserva;
+    }
+    public void eliminar(Reserva r) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " delete from h.reserva "
+                    + " where id = ? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+
+            
+            
+            
+
+            //return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            
+            throw new RuntimeException("Problemas al hacer la reserva");
+        }
     }
     
     

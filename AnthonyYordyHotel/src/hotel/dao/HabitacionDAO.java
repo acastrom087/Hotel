@@ -18,15 +18,16 @@ import java.util.LinkedList;
  */
 public class HabitacionDAO {
     
-    public LinkedList<Habitacion> buscar() {
+    public LinkedList<Habitacion> buscar(String filtro) {
         LinkedList<Habitacion> habitaciones = new LinkedList<>();
 
         try ( Connection con = Conexion.getConexion()) {
-            String sql = "select id, capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo from h.habitacion ";
+            String sql = "select id, capacidad_max, capacidad_min, tipo, precio_noche, disponible, activo from h.habitacion"
+                    +    " where lower(tipo) like lower(?) ";
                     
             PreparedStatement stm = con.prepareStatement(sql);
-//            stm.setString(1, filtro + '%');
-//            stm.setString(2, filtro + '%');
+            stm.setString(1, filtro + '%');
+            
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

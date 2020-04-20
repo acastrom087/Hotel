@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 /**
  *
@@ -97,4 +98,27 @@ public class EmpleadoDAO {
         }
         return null;
     }
+    public LinkedList<Empleado> buscar(String filtro) {
+        LinkedList<Empleado> clientes = new LinkedList<>();
+
+        try ( Connection con = Conexion.getConexion()) {
+            String sql = " select id, cedula, nombre, correo, usuario, contrasena, tipo, activo from h.empleado"
+                    + " where lower(nombre) like lower(?) ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, filtro + '%');
+           // stm.setString(2, filtro + '%');
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                clientes.add(cargar(rs));
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("Favor intente nuevamente");
+        }
+        return clientes;
+    }
+
+
 }

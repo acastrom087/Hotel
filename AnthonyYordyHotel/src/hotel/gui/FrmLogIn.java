@@ -6,7 +6,9 @@
 package hotel.gui;
 
 import hotel.bo.EmpleadoBO;
+import hotel.bo.hotelBO;
 import hotel.entities.Empleado;
+import hotel.entities.Hotel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +24,12 @@ private EmpleadoBO ebo;
         initComponents();
         setLocationRelativeTo(null);
         ebo = new EmpleadoBO();
+//        if (crearHotel()) {
+//            FrmCrear frm = new FrmCrear();
+//            frm.pack();
+//            frm.setVisible(true);
+//            
+//        }
     }
 
     /**
@@ -92,6 +100,16 @@ private EmpleadoBO ebo;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Boolean crearHotel(){
+        Hotel h = new Hotel();
+        h = new hotelBO().verificar();
+        if (h == null) {
+            return true;
+        }
+        return false;
+    }
+    
+    
     private void lblSigInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSigInMouseClicked
         DlgRegistrarse dlg = new DlgRegistrarse(this, true, null);
         dlg.pack();
@@ -105,24 +123,14 @@ private EmpleadoBO ebo;
             e.setUsuario(txtUsuario.getText());
             e.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
             e = ebo.autenticar(e);
-            char admin = 'a';
-            if (e.getTipo() == admin ) {
-                txtUsuario.setText("");
-                txtContrasena.setText("");
-                FrmMantHabitacion dlg = new FrmMantHabitacion(this, e);
-                dlg.pack();
-                dlg.setVisible(true);
-                
-                
-                
-            } 
             if (e != null) {
-                System.out.println(e.getTipo());
+                
                 txtUsuario.setText("");
                 txtContrasena.setText("");
-                FrmPrincipal frm = new FrmPrincipal(this, e);
+                FrmSeleccionar frm = new FrmSeleccionar(this, e);
                 frm.pack();
                 frm.setVisible(true);
+                setVisible(false);
                 
             }
             

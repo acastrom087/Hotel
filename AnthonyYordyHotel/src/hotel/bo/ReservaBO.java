@@ -20,7 +20,7 @@ import java.util.LinkedList;
 public class ReservaBO {
     
     public boolean insertar(Reserva r, Cliente c, int id, Empleado e){
-        LinkedList<Reserva> list = new ReservaDAO().cargar();
+        LinkedList<Reserva> list = new ReservaDAO().cargar("");
         if (c == null) {
             throw new RuntimeException("Necesita un usuario ");
         }
@@ -51,19 +51,31 @@ public class ReservaBO {
                 if (r.getFecha_entrada().isBefore(rh.getFecha_entrada())&& r.getFecha_salida().isAfter(rh.getFecha_salida())) {
                     throw new RuntimeException("Las fecha ingresadas no estan disponibles");
                 }
+                if (r.getFecha_salida().isEqual(rh.getFecha_salida())) {
+                    
+                }
             }
         }
         }
         return new ReservaDAO().insertar(r, c, id, e);
     }
 
-    public LinkedList<Reserva> cargar() {
-            return new ReservaDAO().cargar();
+    public LinkedList<Reserva> cargar(String filtro) {
+            return new ReservaDAO().cargar(filtro);
     }
 
     public LinkedList<Reserva> ocupados() {
         
             return new ReservaDAO().ocupados();
+    }
+    public void eliminar(){
+        LinkedList<Reserva> trash = cargar("");
+        for (Reserva r : trash) {
+            if (r.getFecha_salida().isBefore(LocalDate.now())) {
+                 new ReservaDAO().eliminar(r);
+            }
+            
+        }
     }
     
 }

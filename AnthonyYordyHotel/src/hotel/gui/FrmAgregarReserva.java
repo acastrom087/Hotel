@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class FrmReserva extends javax.swing.JFrame {
+public class FrmAgregarReserva extends javax.swing.JFrame {
 private JFrame parent;
 private Empleado e;
 private int id;
@@ -30,7 +30,7 @@ private final DefaultListModel<Cliente> modelo;
     /**
      * Creates new form FrmReserva
      */
-    public FrmReserva(JFrame parent, int id, Empleado e) {
+    public FrmAgregarReserva(JFrame parent, int id, Empleado e) {
         initComponents();
         setLocationRelativeTo(parent);
         this.parent = parent;
@@ -64,11 +64,15 @@ private final DefaultListModel<Cliente> modelo;
         lista = new javax.swing.JList<>();
         txtFechaEntrada = new javax.swing.JFormattedTextField();
         txtFechaSalida = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Fecha de entrada:");
 
@@ -90,7 +94,12 @@ private final DefaultListModel<Cliente> modelo;
             ex.printStackTrace();
         }
 
-        jButton1.setText("Agregar");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,8 +107,6 @@ private final DefaultListModel<Cliente> modelo;
                 btnGuardarActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,9 +129,7 @@ private final DefaultListModel<Cliente> modelo;
                                 .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,10 +147,7 @@ private final DefaultListModel<Cliente> modelo;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                    .addComponent(btnAgregar))
                 .addGap(33, 33, 33)
                 .addComponent(btnGuardar)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -176,6 +178,17 @@ private final DefaultListModel<Cliente> modelo;
             JOptionPane.showMessageDialog(this, "Intente nuevamente");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        FrmMantCliente frm = new FrmMantCliente(this, e);
+        frm.pack();
+        frm.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
     
     /**
      * @param args the command line arguments
@@ -183,9 +196,8 @@ private final DefaultListModel<Cliente> modelo;
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

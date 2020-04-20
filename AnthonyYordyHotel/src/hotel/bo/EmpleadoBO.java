@@ -6,6 +6,7 @@
 package hotel.bo;
 import hotel.dao.EmpleadoDAO;
 import hotel.entities.Empleado;
+import java.util.LinkedList;
 import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
@@ -58,5 +59,10 @@ public class EmpleadoBO {
         }
         e.setContrasena(DigestUtils.md5Hex(e.getContrasena()));
         return new EmpleadoDAO().auntenticar(e);
+    }
+    
+    public LinkedList<Empleado> buscar(String filtro) {
+        return new EmpleadoDAO().buscar(filtro);
+        
     }
 }

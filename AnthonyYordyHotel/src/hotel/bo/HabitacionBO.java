@@ -15,8 +15,8 @@ import java.util.LinkedList;
  */
 public class HabitacionBO {
 
-    public LinkedList<Habitacion> buscar() {
-        return new HabitacionDAO().buscar(); 
+    public LinkedList<Habitacion> buscar(String filtro) {
+        return new HabitacionDAO().buscar(filtro); 
     }
     
     public boolean insertar(Habitacion h){

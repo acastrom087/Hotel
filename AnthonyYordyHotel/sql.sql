@@ -10,6 +10,13 @@ tipo TEXT NOT NULL,
 activo BOOLEAN DEFAULT TRUE
 );
 
+CREATE TABLE h.hotel
+(
+id SERIAL PRIMARY KEY,
+fila INT NOT NULL,
+columna INT NOT NULL
+);
+
 CREATE TABLE h.habitacion
 (
 id SERIAL PRIMARY KEY,

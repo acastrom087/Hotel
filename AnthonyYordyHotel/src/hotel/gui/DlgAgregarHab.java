@@ -156,7 +156,7 @@ private int indice;
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-                
+        getParent().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     /**
