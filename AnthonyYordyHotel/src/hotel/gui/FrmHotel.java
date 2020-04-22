@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -66,21 +67,33 @@ public class FrmHotel extends javax.swing.JFrame {
             btn.setName("btn,"+h.getId());
             int id = Integer.parseInt(btn.getName().split(",")[1]);
             if (h.getTipo().equalsIgnoreCase("Doble")) {
-                btn.setBackground(Color.RED);
+                btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Doble");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_bed_36px_4.png")));
             }if (h.getTipo().equalsIgnoreCase("Matrimonial")) {
-                btn.setBackground(Color.WHITE);
+                btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Matrimonial");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_wedding_36px.png")));
             }if (h.getTipo().equalsIgnoreCase("Sencilla")) {
-                btn.setBackground(Color.BLUE);
+                btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Sencilla");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_Empty_Bed_36px.png")));
             }if (h.getTipo().trim().equalsIgnoreCase("Suite Junior")) {
                 btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Suite Junior");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_bed_36px_4.png")));
             }if (h.getTipo().trim().equalsIgnoreCase("Suite Doble")) {
-                btn.setBackground(Color.ORANGE);
+                btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Suite Doble");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_bed_36px_5.png")));
             }if (h.getTipo().equalsIgnoreCase("Suite Presidencial")) {
-                btn.setBackground(Color.YELLOW);
+                btn.setBackground(Color.GREEN);
+                btn.setToolTipText("Suite Presidencial");
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_bedroom_36px.png")));
             }
             for (Reserva r : new ReservaBO().ocupados()) {
                 if (id == r.getHabitacion().getId()) {
-                    btn.setBackground(Color.BLACK);
+                    btn.setBackground(Color.RED);
                     
                 }
             }
