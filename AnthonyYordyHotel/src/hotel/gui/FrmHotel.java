@@ -140,7 +140,7 @@ public class FrmHotel extends javax.swing.JFrame {
 
         txtFechaActual.setEditable(false);
         txtFechaActual.setBackground(new java.awt.Color(255, 255, 255));
-        txtFechaActual.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 153, 153)));
+        txtFechaActual.setBorder(null);
         txtFechaActual.setForeground(new java.awt.Color(153, 153, 153));
         txtFechaActual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL))));
         txtFechaActual.addActionListener(new java.awt.event.ActionListener() {

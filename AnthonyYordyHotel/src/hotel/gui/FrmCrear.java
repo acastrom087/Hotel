@@ -32,6 +32,7 @@ public class FrmCrear extends javax.swing.JFrame {
         txtFila = new javax.swing.JTextField();
         txtColumna = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -41,14 +42,17 @@ public class FrmCrear extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/Costa-Rica_Manuel_Antonio-a.jpg"))); // NOI18N
 
         txtFila.setBackground(new java.awt.Color(255, 255, 255));
+        txtFila.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         txtFila.setForeground(new java.awt.Color(102, 102, 102));
         txtFila.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Habitaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         txtColumna.setBackground(new java.awt.Color(255, 255, 255));
+        txtColumna.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         txtColumna.setForeground(new java.awt.Color(102, 102, 102));
         txtColumna.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edificios", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         btnCrear.setBackground(new java.awt.Color(0, 102, 102));
+        btnCrear.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         btnCrear.setText("Crear");
         btnCrear.setBorder(null);
 
@@ -66,12 +70,17 @@ public class FrmCrear extends javax.swing.JFrame {
                         .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)))
                 .addGap(234, 234, 234))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(txtColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(txtFila, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,6 +142,7 @@ public class FrmCrear extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtColumna;
     private javax.swing.JTextField txtFila;
     // End of variables declaration//GEN-END:variables
