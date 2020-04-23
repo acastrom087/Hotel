@@ -76,7 +76,7 @@ private Empleado e;
 
         tabla.setBackground(new java.awt.Color(255, 255, 255));
         tabla.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        tabla.setForeground(new java.awt.Color(102, 102, 102));
+        tabla.setForeground(new java.awt.Color(51, 51, 51));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -106,8 +106,8 @@ private Empleado e;
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(153, 153, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_24px_1.png"))); // NOI18N
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 1, true));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_24px_2.png"))); // NOI18N
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 0, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -117,13 +117,13 @@ private Empleado e;
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(153, 153, 153));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_edit_24px.png"))); // NOI18N
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 1, true));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_edit_24px_1.png"))); // NOI18N
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 0, true));
 
         jButton3.setBackground(new java.awt.Color(0, 102, 102));
         jButton3.setForeground(new java.awt.Color(153, 153, 153));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_ok_24px.png"))); // NOI18N
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 1, true));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_ok_24px_1.png"))); // NOI18N
+        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 0, true));
 
         txtBuscar.setBackground(new java.awt.Color(255, 255, 255));
         txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
@@ -132,8 +132,8 @@ private Empleado e;
         jButton4.setBackground(new java.awt.Color(0, 102, 102));
         jButton4.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(153, 153, 153));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_search_24px.png"))); // NOI18N
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 1, true));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_search_24px_1.png"))); // NOI18N
+        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 0, true));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -171,10 +171,12 @@ private Empleado e;
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

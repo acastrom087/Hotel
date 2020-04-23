@@ -118,8 +118,8 @@ private final DefaultListModel<Cliente> modelo;
         }
 
         btnAgregar.setBackground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_24px.png"))); // NOI18N
-        btnAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_user_male_24px.png"))); // NOI18N
+        btnAgregar.setBorder(null);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -128,8 +128,8 @@ private final DefaultListModel<Cliente> modelo;
 
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setForeground(new java.awt.Color(153, 153, 153));
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_save_16px.png"))); // NOI18N
-        btnGuardar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_save_close_24px.png"))); // NOI18N
+        btnGuardar.setBorder(null);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);

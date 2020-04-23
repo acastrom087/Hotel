@@ -20,7 +20,7 @@ public class Conexion {
     private static final String PUERTO = "5432";
     private static final String DB = "hotel";
     private static final String USER = "postgres";
-    private static final String PASS = "facebook13";
+    private static final String PASS = "postgres";
 
     public static Connection getConexion() throws Exception {
         Connection con = null;

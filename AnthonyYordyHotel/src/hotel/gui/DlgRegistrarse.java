@@ -55,6 +55,7 @@ private Empleado e;
 
         btnRegistrarse.setBackground(new java.awt.Color(0, 51, 204));
         btnRegistrarse.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        btnRegistrarse.setForeground(new java.awt.Color(204, 204, 204));
         btnRegistrarse.setText("Registrarse");
         btnRegistrarse.setBorder(null);
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +68,7 @@ private Empleado e;
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasena.setForeground(new java.awt.Color(153, 153, 153));
         txtContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 12))); // NOI18N
 
         txtCedula.setBackground(new java.awt.Color(255, 255, 255));

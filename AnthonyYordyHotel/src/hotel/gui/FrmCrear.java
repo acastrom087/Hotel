@@ -54,6 +54,7 @@ public class FrmCrear extends javax.swing.JFrame {
 
         btnCrear.setBackground(new java.awt.Color(0, 102, 102));
         btnCrear.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setText("Crear");
         btnCrear.setBorder(null);
 
