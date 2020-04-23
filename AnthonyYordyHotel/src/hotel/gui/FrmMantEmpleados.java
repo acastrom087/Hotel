@@ -69,26 +69,27 @@ private EmpleadoBO ebo;
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnAgregar.setBackground(new java.awt.Color(204, 204, 204));
+        btnAgregar.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_user_male_24px.png"))); // NOI18N
         btnAgregar.setBorder(null);
 
-        btnEditar.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_registration_24px.png"))); // NOI18N
         btnEditar.setBorder(null);
 
-        btnDesactivar.setBackground(new java.awt.Color(204, 204, 204));
+        btnDesactivar.setBackground(new java.awt.Color(255, 255, 255));
         btnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_checked_user_male_24px.png"))); // NOI18N
         btnDesactivar.setBorder(null);
 
         txtFiltro.setBackground(new java.awt.Color(255, 255, 255));
+        txtFiltro.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         txtFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFiltroActionPerformed(evt);
             }
         });
 
-        btnBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_find_user_male_24px_1.png"))); // NOI18N
         btnBuscar.setBorder(null);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +99,7 @@ private EmpleadoBO ebo;
         });
 
         tabla.setBackground(new java.awt.Color(255, 255, 255));
+        tabla.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

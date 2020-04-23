@@ -63,7 +63,7 @@ public class FrmSeleccionar extends javax.swing.JFrame {
             }
         });
 
-        btnAdministrar.setBackground(new java.awt.Color(0, 51, 255));
+        btnAdministrar.setBackground(new java.awt.Color(255, 102, 0));
         btnAdministrar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_businessman_50px.png"))); // NOI18N
         btnAdministrar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Administrador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Cambria", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
