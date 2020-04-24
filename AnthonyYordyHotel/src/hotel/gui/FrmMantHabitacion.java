@@ -153,6 +153,11 @@ private Empleado e;
         btnDesactivar.setBackground(new java.awt.Color(255, 255, 255));
         btnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_minus_24px.png"))); // NOI18N
         btnDesactivar.setBorder(null);
+        btnDesactivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesactivarActionPerformed(evt);
+            }
+        });
 
         btnActivar.setBackground(new java.awt.Color(255, 255, 255));
         btnActivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_ok_24px_2.png"))); // NOI18N
@@ -252,24 +257,55 @@ private Empleado e;
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            
+        
         int row = tabla.getSelectedRow();
         Habitacion h = new Habitacion();
         h =(Habitacion) tabla.getValueAt(row, 0);
         DlgEditarHab dlg = new DlgEditarHab(this, true, h);
         dlg.pack();
         dlg.setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe de seleccionar una habitacion");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+    try {
+            
+        
         int row = tabla.getSelectedRow();
         Habitacion h = new Habitacion();
-        e =(Empleado) tabla.getValueAt(row, 0);
+        h =(Habitacion) tabla.getValueAt(row, 0);
         if (hbo.activar(h)) {
-            JOptionPane.showConfirmDialog(this, "Habitacion activada");
+            JOptionPane.showMessageDialog(this, "Habitacion activada");
             
+        }
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Intente debe de seleccionar una habitacion");
         }
 
     }//GEN-LAST:event_btnActivarActionPerformed
+
+    private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
+        try {
+            
+        
+        int row = tabla.getSelectedRow();
+        Habitacion h = new Habitacion();
+        h =(Habitacion) tabla.getValueAt(row, 0);
+        if (hbo.desactivar(h)) {
+            JOptionPane.showMessageDialog(this, "Habitacion desactivada");
+            
+        }
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe de seleccionar una habitacion");
+        }
+    }//GEN-LAST:event_btnDesactivarActionPerformed
 
     /**
      * @param args the command line arguments

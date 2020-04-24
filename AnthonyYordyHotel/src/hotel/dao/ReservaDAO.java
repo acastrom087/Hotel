@@ -88,9 +88,11 @@ public class ReservaDAO {
         LinkedList<Reserva> reserva = new LinkedList<>();
 
         try ( Connection con = Conexion.getConexion()) {
-            String sql = " select id, fecha_entrada, fecha_salida, id_cliente, id_habitacion, id_empleado "
-                    +      "from h.reserva "
-                    +       " where ? between fecha_entrada and fecha_salida ";
+            String sql = " select r.id, fecha_entrada, fecha_salida, id_cliente, id_habitacion, id_empleado "
+                    +      "from h.reserva r"
+                    +       " join h.habitacion a"
+                    +       " on r.id_habitacion = a.id "
+                    +       " where ? between fecha_entrada and fecha_salida or a.activo = false  ";
                     
             PreparedStatement stm = con.prepareStatement(sql);
            stm.setDate(1, Date.valueOf(LocalDate.now()));

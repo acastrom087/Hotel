@@ -228,20 +228,33 @@ private EmpleadoBO ebo;
     }//GEN-LAST:event_txtFiltroActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            
+
         int row = tabla.getSelectedRow();
         Empleado e = new Empleado();
         e =(Empleado) tabla.getValueAt(row, 0);
         DlgRegistrarse dlg = new DlgRegistrarse(this, true, e);
         dlg.pack();
         dlg.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe de selecionar un empleado");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
+        try {
+
         int row = tabla.getSelectedRow();
         Empleado e = new Empleado();
         e =(Empleado) tabla.getValueAt(row, 0);
         if(ebo.desactivarActivar(e)){
             JOptionPane.showMessageDialog(this, "Empleado activado/desactivado");
+                
+        }
+                    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe de selecionar un empleado");
         }
     }//GEN-LAST:event_btnDesactivarActionPerformed
 

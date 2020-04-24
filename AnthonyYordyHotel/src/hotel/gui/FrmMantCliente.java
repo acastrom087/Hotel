@@ -233,12 +233,18 @@ private Empleado e;
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            
+
         int row = tabla.getSelectedRow();
         Cliente c = new Cliente();
         c =(Cliente) tabla.getValueAt(row, 0);
         DlgAgregarCliente dlg = new DlgAgregarCliente(this,true, c);
         dlg.pack();
         dlg.setVisible(true);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Debe de seleccionar un cliente");
+}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
