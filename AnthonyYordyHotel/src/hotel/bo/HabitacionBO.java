@@ -32,8 +32,33 @@ public class HabitacionBO {
         if (h.getPrecioNoche() <= 0) {
             throw new RuntimeException("Precio por noche invalida");
         }
-        
+        if (h.getId()>0) {
+            return new HabitacionDAO().editar(h);
+        }
+        else{
         return new HabitacionDAO().insertar(h);
+        }
+    }
+    
+    public boolean activar(Habitacion h){
+        if (h == null) {
+            throw new RuntimeException("Debe de seleccionar una habitacion");
+        }if (h.isActivo()) {
+            return true;
+        }
+        h.setActivo(true);
+        return new HabitacionDAO().editar(h); 
+    }
+    
+        public boolean desactivar(Habitacion h){
+        if (h == null) {
+            throw new RuntimeException("Debe de seleccionar una habitacion");
+        }if (!h.isActivo()) {
+            
+            return true;
+        }
+        h.setActivo(false);
+        return new HabitacionDAO().editar(h); 
     }
     
     

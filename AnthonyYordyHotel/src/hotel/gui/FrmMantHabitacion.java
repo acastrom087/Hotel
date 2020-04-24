@@ -157,6 +157,11 @@ private Empleado e;
         btnActivar.setBackground(new java.awt.Color(255, 255, 255));
         btnActivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_ok_24px_2.png"))); // NOI18N
         btnActivar.setBorder(null);
+        btnActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/mantemple.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -254,6 +259,17 @@ private Empleado e;
         dlg.pack();
         dlg.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+        int row = tabla.getSelectedRow();
+        Habitacion h = new Habitacion();
+        e =(Empleado) tabla.getValueAt(row, 0);
+        if (hbo.activar(h)) {
+            JOptionPane.showConfirmDialog(this, "Habitacion activada");
+            
+        }
+
+    }//GEN-LAST:event_btnActivarActionPerformed
 
     /**
      * @param args the command line arguments

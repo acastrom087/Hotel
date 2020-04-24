@@ -163,7 +163,6 @@ private Habitacion h;
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
            
-            Habitacion h = new Habitacion();
             h.setCapacidadMax(Integer.parseInt(txtCapacidadMax.getText()));
             h.setCapacidadMin(Integer.parseInt(txtCapacidadMin.getText()));
             h.setTipo(String.valueOf(cbxTipo.getSelectedItem()));

@@ -96,4 +96,29 @@ public class HabitacionDAO {
         return null;
     }
     
+    public boolean editar(Habitacion h ) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " update h.habitacion set capacidad_max = ?, capacidad_min= ?, tipo=?, precio_noche=?, disponible= ?, "
+                    + "  activo = ? "
+                    + " where id = ? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+                stm.setInt(1, h.getCapacidadMax());
+                stm.setInt(2, h.getCapacidadMin());
+                stm.setString(3, h.getTipo());
+                stm.setInt(4, h.getPrecioNoche());
+                stm.setBoolean(5, h.isDisponible());
+                stm.setBoolean(6, h.isActivo());
+                stm.setInt(7, h.getId());
+
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = "Problemas al editar";
+            ex.printStackTrace();
+            throw new RuntimeException(msj);
+        }
+
+    
+}
+    
 }
