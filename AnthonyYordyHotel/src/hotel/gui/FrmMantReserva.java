@@ -31,6 +31,7 @@ public class FrmMantReserva extends javax.swing.JFrame {
         this.id = id;
         setLocationRelativeTo(parent);
         rbo = new ReservaBO();
+        eliminar();
         
         
     }
@@ -88,6 +89,11 @@ public class FrmMantReserva extends javax.swing.JFrame {
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_delete_document_24px.png"))); // NOI18N
         btnEliminar.setBorder(null);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_add_file_24px.png"))); // NOI18N
@@ -233,6 +239,21 @@ public class FrmMantReserva extends javax.swing.JFrame {
         frm.pack();
         frm.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            Reserva r = new Reserva();
+            int row = tabla.getSelectedRow();
+            if (rbo.delete(r)) {
+                JOptionPane.showMessageDialog(this, "Reserva eliminada");
+            }
+            
+        }catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
         private void eliminar(){
             rbo.eliminar();

@@ -210,6 +210,7 @@ private Cliente c;
                 txtNombre.setText("");
                 txtCorreo.setText("");
                 txtCelular.setText("");
+                dispose();
             }
         }catch (RuntimeException ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());

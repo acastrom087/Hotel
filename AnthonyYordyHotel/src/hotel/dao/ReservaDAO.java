@@ -107,12 +107,14 @@ public class ReservaDAO {
         }
         return reserva;
     }
-    public void eliminar(Reserva r) {
+    public boolean eliminar(Reserva r) {
         try ( java.sql.Connection con = Conexion.getConexion()) {
             String sql = " delete from h.reserva "
                     + " where id = ? ";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, r.getId());
+            
+            return stm.executeUpdate()==1;
 
             
             

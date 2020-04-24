@@ -42,17 +42,24 @@ private final DefaultListModel<Cliente> modelo;
         modelo = new DefaultListModel<>();
         lista.setModel(modelo);
         llenarLista();
-        if (r != null) {
-            txtFechaEntrada.setText(r.getFecha_entrada().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            txtFechaSalida.setText(r.getFecha_salida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            lista.setEnabled(false);
+        if (r == null) {
+            this.r = new Reserva();
+        }else{
+            cargar();
         }
     }
     
     private void llenarLista(){
+        modelo.removeAllElements();
         for (Cliente c : cbo.buscar("")) {
             modelo.addElement(c);
         }
+    }
+    
+    private void cargar(){
+        txtFechaEntrada.setText(r.getFecha_entrada().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            txtFechaSalida.setText(r.getFecha_salida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            lista.setEnabled(false);
     }
 
     /**
@@ -75,6 +82,7 @@ private final DefaultListModel<Cliente> modelo;
         btnAgregar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        btnAgregar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -146,6 +154,15 @@ private final DefaultListModel<Cliente> modelo;
         jSeparator1.setBackground(new java.awt.Color(0, 102, 102));
         jSeparator1.setForeground(new java.awt.Color(0, 102, 102));
 
+        btnAgregar1.setBackground(new java.awt.Color(255, 255, 255));
+        btnAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_synchronize_24px.png"))); // NOI18N
+        btnAgregar1.setBorder(null);
+        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,6 +175,8 @@ private final DefaultListModel<Cliente> modelo;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,9 +212,11 @@ private final DefaultListModel<Cliente> modelo;
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -215,14 +236,16 @@ private final DefaultListModel<Cliente> modelo;
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            Reserva r = new Reserva();
+            
             r.setFecha_entrada(LocalDate.parse(txtFechaEntrada.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             r.setFecha_salida(LocalDate.parse(txtFechaSalida.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            
             Cliente c = new Cliente();
             c = lista.getSelectedValue();
             
             if (new ReservaBO().insertar(r ,c ,id, e) ) {
                 JOptionPane.showMessageDialog(this, "Reserva hecha/Editada");
+                dispose();
             }
             
             
@@ -246,6 +269,10 @@ private final DefaultListModel<Cliente> modelo;
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+        llenarLista();
+    }//GEN-LAST:event_btnAgregar1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -254,6 +281,7 @@ private final DefaultListModel<Cliente> modelo;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

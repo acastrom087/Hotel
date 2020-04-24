@@ -76,14 +76,21 @@ public class ReservaBO {
         
             return new ReservaDAO().ocupados();
     }
-    public void eliminar(){
+    public boolean eliminar(){
         LinkedList<Reserva> trash = cargar("");
         for (Reserva r : trash) {
             if (r.getFecha_salida().isBefore(LocalDate.now())) {
-                 new ReservaDAO().eliminar(r);
+                return new ReservaDAO().eliminar(r);
             }
             
         }
+        return false;
+    }
+    public boolean delete(Reserva r){
+        if (r == null) {
+            throw new RuntimeException("Debe de seleccinar una reserva");
+        }
+        return new ReservaDAO().eliminar(r);
     }
     
 }
