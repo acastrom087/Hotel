@@ -65,7 +65,7 @@ public class ReservaDAO {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
             throw new RuntimeException("Favor intente nuevamente");
         }
         return reserva;
@@ -104,7 +104,7 @@ public class ReservaDAO {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
             throw new RuntimeException("Favor intente nuevamente");
         }
         return reserva;
@@ -144,8 +144,8 @@ public class ReservaDAO {
             return stm.executeUpdate() == 1;
 
         } catch (Exception ex) {
-            String msj = "Problemas al editar la reserva";
-            throw new RuntimeException(msj);
+            
+            throw new RuntimeException("Problemas al editar la reserva");
         }
     }
     

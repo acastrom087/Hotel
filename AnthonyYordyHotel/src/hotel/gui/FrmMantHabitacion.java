@@ -281,6 +281,7 @@ private Empleado e;
         h =(Habitacion) tabla.getValueAt(row, 0);
         if (hbo.activar(h)) {
             JOptionPane.showMessageDialog(this, "Habitacion activada");
+            llenarTabla("");
             
         }
         } 
@@ -299,6 +300,7 @@ private Empleado e;
         h =(Habitacion) tabla.getValueAt(row, 0);
         if (hbo.desactivar(h)) {
             JOptionPane.showMessageDialog(this, "Habitacion desactivada");
+            llenarTabla("");
             
         }
         } 

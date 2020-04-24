@@ -250,7 +250,7 @@ private final DefaultListModel<Cliente> modelo;
             
             
         }catch (RuntimeException ex){
-            ex.printStackTrace();
+            
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
         

@@ -36,7 +36,7 @@ public class ClienteDAO {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
             throw new RuntimeException("Favor intente nuevamente");
         }
         return clientes;
@@ -70,13 +70,8 @@ public class ClienteDAO {
             return stm.executeUpdate() == 1;
 
         } catch (Exception ex) {
-            String msj = ex.getMessage().contains("unq_usuarios_usuario")
-                    ? "Usuario previamente registrado"
-                    : ex.getMessage().contains("usuarios_correo_key")
-                    ? "Correo previamente registrado"
-                    : "Problemas al registrar el Usuario";
-            ex.printStackTrace();
-            throw new RuntimeException(msj);
+            
+            throw new RuntimeException("Intente de nuevo");
         }
     
 }       
@@ -114,7 +109,7 @@ public class ClienteDAO {
 
         } catch (Exception ex) {
             String msj = "Problemas al editar";
-            ex.printStackTrace();
+            
             throw new RuntimeException(msj);
         }
     

@@ -35,7 +35,7 @@ public class HabitacionDAO {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
             throw new RuntimeException("Favor intente nuevamente");
         }
         return habitaciones;
@@ -71,7 +71,7 @@ public class HabitacionDAO {
 
         } catch (Exception ex) {
             
-            ex.printStackTrace();
+            
             throw new RuntimeException("Favor intente de nuevo");
         }
 
@@ -113,9 +113,9 @@ public class HabitacionDAO {
             return stm.executeUpdate() == 1;
 
         } catch (Exception ex) {
-            String msj = "Problemas al editar";
-            ex.printStackTrace();
-            throw new RuntimeException(msj);
+            
+            
+            throw new RuntimeException("Intente nuevamente");
         }
 
     

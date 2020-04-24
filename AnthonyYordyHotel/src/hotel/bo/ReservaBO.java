@@ -52,7 +52,7 @@ public class ReservaBO {
                     throw new RuntimeException("Las fecha ingresadas no estan disponibles");
                 }
                 if (r.getFecha_salida().isEqual(rh.getFecha_salida())) {
-                    
+                    throw new RuntimeException("Las fechas nos estan disponibles");
                 }
             }
         }
