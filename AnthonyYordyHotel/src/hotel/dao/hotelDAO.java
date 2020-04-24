@@ -43,6 +43,33 @@ public class hotelDAO {
         
 
         return h;
-    }        
+    }     
+    
+      public boolean insertar(Hotel h) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " INSERT INTO  h.hotel (id, fila, columna) "
+                    + " VALUES (?, ?, ?) ";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, h.getId());
+            stm.setInt(2, h.getFilas());
+            stm.setInt(3, h.getColumna());
+            
+            
+            
+            
+
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = ex.getMessage().contains("unq_usuarios_usuario")
+                    ? "Usuario previamente registrado"
+                    : ex.getMessage().contains("usuarios_correo_key")
+                    ? "Correo previamente registrado"
+                    : "Problemas al registrar el Usuario";
+            ex.printStackTrace();
+            throw new RuntimeException(msj);
+        }
+    
+}
     
 }

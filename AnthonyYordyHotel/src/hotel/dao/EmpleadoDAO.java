@@ -119,6 +119,33 @@ public class EmpleadoDAO {
         }
         return clientes;
     }
+    
+    public boolean editar(Empleado a, boolean estado) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " update h.empleado set cedula = ?, nombre = ?, correo=?, usuario =?, contrasena = ?, "
+                    + "  tipo = ?, activo = ? "
+                    + " where id = ? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+                stm.setInt(1, a.getCedula());
+                stm.setString(2, a.getNombre());
+                stm.setString(3, a.getCorreo());
+                stm.setString(4, a.getUsuario());
+                stm.setString(5, a.getContrasena());
+                stm.setString(6, String.valueOf(a.getTipo()));
+                stm.setBoolean(7, estado);
+                stm.setInt(8, a.getId());
+            
+
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = "Problemas al editar";
+            ex.printStackTrace();
+            throw new RuntimeException(msj);
+        }
+
+    
+}
 
 
 }

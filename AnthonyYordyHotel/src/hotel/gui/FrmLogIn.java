@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class FrmLogIn extends javax.swing.JFrame {
 private EmpleadoBO ebo;
+private int fila;
+private int columna;
     /**
      * Creates new form FrmLogIn
      */
@@ -24,12 +26,13 @@ private EmpleadoBO ebo;
         initComponents();
         setLocationRelativeTo(null);
         ebo = new EmpleadoBO();
-//        if (crearHotel()) {
-//            FrmCrear frm = new FrmCrear();
-//            frm.pack();
-//            frm.setVisible(true);
-//            
-//        }
+        if (crearHotel()) {
+            FrmCrear frm = new FrmCrear(this);
+            frm.pack();
+            frm.setVisible(true);
+            
+            
+        }
     }
 
     /**
@@ -150,18 +153,18 @@ private EmpleadoBO ebo;
 
     private Boolean crearHotel(){
         Hotel h = new Hotel();
-        h = new hotelBO().verificar();
+        h = new hotelBO().verHotel();
         if (h == null) {
             return true;
         }
+        this.fila = h.getFilas();
+        this.columna = h.getColumna();
         return false;
     }
     
     
     private void lblSigInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSigInMouseClicked
-        DlgRegistrarse dlg = new DlgRegistrarse(this, true, null);
-        dlg.pack();
-        dlg.setVisible(true);
+       
         
     }//GEN-LAST:event_lblSigInMouseClicked
 
@@ -172,10 +175,10 @@ private EmpleadoBO ebo;
             e.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
             e = ebo.autenticar(e);
             if (e != null) {
-                
+                System.out.println(fila + "-" + columna);
                 txtUsuario.setText("");
                 txtContrasena.setText("");
-                FrmSeleccionar frm = new FrmSeleccionar(this, e);
+                FrmSeleccionar frm = new FrmSeleccionar(this, e, fila, columna);
                 frm.pack();
                 frm.setVisible(true);
                 setVisible(false);

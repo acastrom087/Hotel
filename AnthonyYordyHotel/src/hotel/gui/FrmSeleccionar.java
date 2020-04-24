@@ -15,14 +15,18 @@ import javax.swing.JFrame;
 public class FrmSeleccionar extends javax.swing.JFrame {
     private JFrame parent;
     private Empleado e;
+    private int fila;
+    private int columna;
 
     /**
      * Creates new form FrmSeleccionar
      */
-    public FrmSeleccionar(JFrame parent, Empleado e) {
+    public FrmSeleccionar(JFrame parent, Empleado e, int fila, int columna) {
         initComponents();
         this.parent = parent;
         this.e = e;
+        this.fila = fila;
+        this.columna = columna;
         setLocationRelativeTo(parent);
         char c = 'a';
         if (e.getTipo() != c) {
@@ -126,7 +130,7 @@ public class FrmSeleccionar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
-        FrmSeleccionar2 frm = new FrmSeleccionar2(this, e);
+        FrmSeleccionar2 frm = new FrmSeleccionar2(this, e,fila, columna);
         frm.pack();
         frm.setVisible(true);
         setVisible(false);
@@ -137,7 +141,7 @@ public class FrmSeleccionar extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void btnHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHotelActionPerformed
-        FrmHotel frm = new FrmHotel(this, e);
+        FrmHotel frm = new FrmHotel(this, e,fila,columna);
         frm.pack();
         frm.setVisible(true);
         setVisible(false);

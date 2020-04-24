@@ -40,7 +40,10 @@ public class EmpleadoBO {
             throw new RuntimeException("Las contrasenas no coninciden");
         }
         
-        else
+        if (a.getId()> 0) {
+            return new EmpleadoDAO().editar(a ,true);
+        }
+            
             a.setContrasena(DigestUtils.md5Hex(a.getContrasena()));
             return new EmpleadoDAO().insertar(a);
         
@@ -64,5 +67,14 @@ public class EmpleadoBO {
     public LinkedList<Empleado> buscar(String filtro) {
         return new EmpleadoDAO().buscar(filtro);
         
+    }
+    public boolean desactivarActivar(Empleado e){
+        if (e == null) {
+            throw new RuntimeException("Seleccione un empleado");
+        }
+        if (e.isActivo()) {
+             return new EmpleadoDAO().editar(e, false);
+        }
+         return new EmpleadoDAO().editar(e, true);
     }
 }

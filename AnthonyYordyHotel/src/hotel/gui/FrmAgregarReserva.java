@@ -26,20 +26,27 @@ private JFrame parent;
 private Empleado e;
 private int id;
 private ClienteBO cbo;
+private Reserva r;
 private final DefaultListModel<Cliente> modelo;
     /**
      * Creates new form FrmReserva
      */
-    public FrmAgregarReserva(JFrame parent, int id, Empleado e) {
+    public FrmAgregarReserva(JFrame parent, int id, Empleado e, Reserva r) {
         initComponents();
         setLocationRelativeTo(parent);
         this.parent = parent;
         this.id = id;
         this.e = e;
+        this.r = r;
         cbo = new ClienteBO();
         modelo = new DefaultListModel<>();
         lista.setModel(modelo);
         llenarLista();
+        if (r != null) {
+            txtFechaEntrada.setText(r.getFecha_entrada().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            txtFechaSalida.setText(r.getFecha_salida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            lista.setEnabled(false);
+        }
     }
     
     private void llenarLista(){
@@ -215,7 +222,7 @@ private final DefaultListModel<Cliente> modelo;
             c = lista.getSelectedValue();
             
             if (new ReservaBO().insertar(r ,c ,id, e) ) {
-                JOptionPane.showMessageDialog(this, "Reserva hecha");
+                JOptionPane.showMessageDialog(this, "Reserva hecha/Editada");
             }
             
             

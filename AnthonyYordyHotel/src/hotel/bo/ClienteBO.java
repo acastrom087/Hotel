@@ -31,6 +31,9 @@ public class ClienteBO {
             throw (new RuntimeException("Debe de ingresar un correo"));
             
         }
+        if (c.getId()>0) {
+            return new ClienteDAO().editar(c);
+        }
          return new ClienteDAO().insertar(c);
             
         }

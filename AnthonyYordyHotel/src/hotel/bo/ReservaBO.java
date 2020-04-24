@@ -57,12 +57,20 @@ public class ReservaBO {
             }
         }
         }
+        if (r.getId()>0) {
+            
+            return new ReservaDAO().editar(r,c,id,e);
+        }
         return new ReservaDAO().insertar(r, c, id, e);
     }
 
     public LinkedList<Reserva> cargar(String filtro) {
             return new ReservaDAO().cargar(filtro);
     }
+    
+    
+    
+    
 
     public LinkedList<Reserva> ocupados() {
         

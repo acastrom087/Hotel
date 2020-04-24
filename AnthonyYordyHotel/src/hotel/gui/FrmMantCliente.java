@@ -119,6 +119,11 @@ private Empleado e;
         jButton2.setForeground(new java.awt.Color(153, 153, 153));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_edit_24px_1.png"))); // NOI18N
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 0, true));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 102, 102));
         jButton3.setForeground(new java.awt.Color(153, 153, 153));
@@ -218,7 +223,7 @@ private Empleado e;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DlgAgregarCliente dlg = new DlgAgregarCliente(this, true);
+        DlgAgregarCliente dlg = new DlgAgregarCliente(this, true, null);
         dlg.pack();
         dlg.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -226,6 +231,15 @@ private Empleado e;
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int row = tabla.getSelectedRow();
+        Cliente c = new Cliente();
+        c =(Cliente) tabla.getValueAt(row, 0);
+        DlgAgregarCliente dlg = new DlgAgregarCliente(this,true, c);
+        dlg.pack();
+        dlg.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

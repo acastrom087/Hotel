@@ -5,17 +5,26 @@
  */
 package hotel.gui;
 
+import hotel.bo.hotelBO;
+import hotel.entities.Hotel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
 public class FrmCrear extends javax.swing.JFrame {
+private JFrame parent;
 
     /**
      * Creates new form FrmCrear
      */
-    public FrmCrear() {
+    public FrmCrear(JFrame parent) {
+        this.parent = parent;
         initComponents();
+        setLocationRelativeTo(parent);
+        parent.setVisible(false);
     }
 
     /**
@@ -29,34 +38,44 @@ public class FrmCrear extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtFila = new javax.swing.JTextField();
         txtColumna = new javax.swing.JTextField();
+        txtFila = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/Costa-Rica_Manuel_Antonio-a.jpg"))); // NOI18N
 
-        txtFila.setBackground(new java.awt.Color(255, 255, 255));
-        txtFila.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
-        txtFila.setForeground(new java.awt.Color(102, 102, 102));
-        txtFila.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Habitaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
-
         txtColumna.setBackground(new java.awt.Color(255, 255, 255));
         txtColumna.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         txtColumna.setForeground(new java.awt.Color(102, 102, 102));
-        txtColumna.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edificios", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        txtColumna.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Habitaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+
+        txtFila.setBackground(new java.awt.Color(255, 255, 255));
+        txtFila.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        txtFila.setForeground(new java.awt.Color(102, 102, 102));
+        txtFila.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edificios", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         btnCrear.setBackground(new java.awt.Color(0, 102, 102));
         btnCrear.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setText("Crear");
         btnCrear.setBorder(null);
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_building_36px_1.png"))); // NOI18N
 
@@ -71,8 +90,8 @@ public class FrmCrear extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtColumna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFila, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtColumna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)))
@@ -90,10 +109,10 @@ public class FrmCrear extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(txtFila, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(txtFila, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(txtColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -112,40 +131,36 @@ public class FrmCrear extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        parent.setVisible(true);
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        try {
+          Hotel  h = new Hotel();
+          h.setFilas(Integer.parseInt(txtFila.getText()));
+          h.setColumna(Integer.parseInt(txtColumna.getText()));
+          if(new hotelBO().insertar(h)){
+              JOptionPane.showMessageDialog(this, "Hotel creado");
+              DlgRegistrarse dlg = new DlgRegistrarse(this, true, null);
+              dlg.pack();
+              dlg.setVisible(true);
+              
+          }
+          
+          
+        }catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmCrear().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;

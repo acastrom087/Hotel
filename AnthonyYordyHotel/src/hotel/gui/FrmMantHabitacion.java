@@ -27,10 +27,11 @@ private Empleado e;
     /**
      * Creates new form FrmRegHabitacion
      */
-    public FrmMantHabitacion(JFrame parent,Empleado e ) {
+    public FrmMantHabitacion(JFrame parent,Empleado e, int fila, int columna ) {
         initComponents();
         this.parent = parent;
-        
+        this.fila = fila;
+        this.columna= columna;
         setLocationRelativeTo(parent);
         hbo = new HabitacionBO();
         this.e = e;
@@ -45,9 +46,7 @@ private Empleado e;
             Object[] row = {h, h.getId(), indice, h.getTipo(),h.getPrecioNoche(),h.isActivo()};
             indice++;
             modelo.addRow(row);
-            if ((fila*columna) == indice) {
-                btnAgregar.setEnabled(false);
-            }
+
         }
     }
 
@@ -66,7 +65,6 @@ private Empleado e;
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnDesactivar = new javax.swing.JButton();
         btnActivar = new javax.swing.JButton();
@@ -117,9 +115,16 @@ private Empleado e;
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabla);
@@ -136,18 +141,14 @@ private Empleado e;
             tabla.getColumnModel().getColumn(5).setMaxWidth(60);
         }
 
-        btnAgregar.setBackground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_joyent_24px.png"))); // NOI18N
-        btnAgregar.setBorder(null);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_edit_24px_2.png"))); // NOI18N
         btnEditar.setBorder(null);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnDesactivar.setBackground(new java.awt.Color(255, 255, 255));
         btnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_minus_24px.png"))); // NOI18N
@@ -180,8 +181,6 @@ private Empleado e;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEditar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnDesactivar)
@@ -199,13 +198,11 @@ private Empleado e;
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar))
+                    .addComponent(btnBuscar)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDesactivar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(btnActivar))
@@ -229,14 +226,6 @@ private Empleado e;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        DlgAgregarHab dlg = new DlgAgregarHab(this, true, fila,columna, indice);
-        dlg.pack();
-        dlg.setVisible(true);
-        setVisible(false);
-        
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         llenarTabla("");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -257,13 +246,21 @@ private Empleado e;
         llenarTabla(filtro);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int row = tabla.getSelectedRow();
+        Habitacion h = new Habitacion();
+        h =(Habitacion) tabla.getValueAt(row, 0);
+        DlgEditarHab dlg = new DlgEditarHab(this, true, h);
+        dlg.pack();
+        dlg.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivar;
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDesactivar;
     private javax.swing.JButton btnEditar;

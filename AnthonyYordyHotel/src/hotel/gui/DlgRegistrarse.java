@@ -22,6 +22,13 @@ private Empleado e;
         initComponents();
         setLocationRelativeTo(parent);
         this.e = e;
+        if (this.e == null) {
+            this.e = new Empleado();
+            
+        }else{
+            cargarEdit();
+        }
+        
     }
 
     /**
@@ -47,6 +54,11 @@ private Empleado e;
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -161,27 +173,38 @@ private Empleado e;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private void cargarEdit(){
+    txtCedula.setText(String.valueOf(e.getCedula()));
+    txtNombre.setText(e.getNombre());
+    txtUsuario.setText(e.getUsuario());
+    txtContrasena.setText(e.getContrasena());
+    txtReContra.setText(e.getContrasena());
+    txtCorreo.setText(e.getCorreo());
+    
+}
+    
+    
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        Empleado a = new Empleado();
-        a.setCedula(Integer.parseInt(txtCedula.getText()));
-        a.setNombre(txtNombre.getText());
-        a.setCorreo(txtCorreo.getText());
-        a.setUsuario(txtUsuario.getText());
-        a.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
+        
+        try {
+            e.setCedula(Integer.parseInt(txtCedula.getText()));
+        e.setNombre(txtNombre.getText());
+        e.setCorreo(txtCorreo.getText());
+        e.setUsuario(txtUsuario.getText());
+        e.setContrasena(String.valueOf(txtContrasena.getPassword()).trim());
         if (e == null) {
-            a.setTipo('a');
+            e.setTipo('a');
         }
         else{
-        a.setTipo('r');
+        e.setTipo('r');
         }
         
         String reContra = String.valueOf(txtReContra.getPassword()).trim();
-        
-        try {
-            if (new EmpleadoBO().insertar(a , reContra )) {
+            if (new EmpleadoBO().insertar(e , reContra )) {
                 JOptionPane.showMessageDialog(this, "Administrador registrado con exito");
                 dispose();
+                
+                
             }
 
             
@@ -200,6 +223,10 @@ private Empleado e;
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

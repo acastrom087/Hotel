@@ -97,7 +97,27 @@ public class ClienteDAO {
         }
         return null;
     }
+        
+        public boolean editar(Cliente c) {
+        try ( java.sql.Connection con = Conexion.getConexion()) {
+            String sql = " update h.cliente set cedula = ?, nombre = ?, celular=?, correo =? "
+                    + " where id = ? ";
+            PreparedStatement stm = con.prepareStatement(sql);
+                stm.setInt(1, c.getCedula());
+                stm.setString(2, c.getNombre());
+                stm.setInt(3, c.getCelular());
+                stm.setString(4, c.getCorreo());
+                stm.setInt(5, c.getId());
+            
+
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = "Problemas al editar";
+            ex.printStackTrace();
+            throw new RuntimeException(msj);
+        }
     
-    
+        }
     
 }

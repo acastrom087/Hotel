@@ -17,15 +17,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmMantEmpleados extends javax.swing.JFrame {
 private JFrame parent;
-private Empleado e;
 private EmpleadoBO ebo;
     /**
      * Creates new form FrmEmpleados
      */
-    public FrmMantEmpleados(JFrame parent, Empleado e) {
+    public FrmMantEmpleados(JFrame parent) {
         initComponents();
         this.parent = parent;
-        this.e = e;
         ebo = new EmpleadoBO();
         setLocationRelativeTo(parent);
     }
@@ -76,10 +74,20 @@ private EmpleadoBO ebo;
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_registration_24px.png"))); // NOI18N
         btnEditar.setBorder(null);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnDesactivar.setBackground(new java.awt.Color(255, 255, 255));
         btnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_checked_user_male_24px.png"))); // NOI18N
         btnDesactivar.setBorder(null);
+        btnDesactivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesactivarActionPerformed(evt);
+            }
+        });
 
         txtFiltro.setBackground(new java.awt.Color(255, 255, 255));
         txtFiltro.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
@@ -111,9 +119,16 @@ private EmpleadoBO ebo;
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabla);
@@ -211,6 +226,24 @@ private EmpleadoBO ebo;
     private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFiltroActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int row = tabla.getSelectedRow();
+        Empleado e = new Empleado();
+        e =(Empleado) tabla.getValueAt(row, 0);
+        DlgRegistrarse dlg = new DlgRegistrarse(this, true, e);
+        dlg.pack();
+        dlg.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
+        int row = tabla.getSelectedRow();
+        Empleado e = new Empleado();
+        e =(Empleado) tabla.getValueAt(row, 0);
+        if(ebo.desactivarActivar(e)){
+            JOptionPane.showMessageDialog(this, "Empleado activado/desactivado");
+        }
+    }//GEN-LAST:event_btnDesactivarActionPerformed
 
     /**
      * @param args the command line arguments

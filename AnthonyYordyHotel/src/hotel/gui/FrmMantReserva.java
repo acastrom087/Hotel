@@ -79,6 +79,11 @@ public class FrmMantReserva extends javax.swing.JFrame {
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_edit_property_24px.png"))); // NOI18N
         btnEditar.setBorder(null);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hotel/img/icons8_delete_document_24px.png"))); // NOI18N
@@ -197,7 +202,7 @@ public class FrmMantReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        FrmAgregarReserva frm = new FrmAgregarReserva(this, id, e);
+        FrmAgregarReserva frm = new FrmAgregarReserva(this, id, e, null);
         frm.pack();
         frm.setVisible(true);
         setVisible(false);
@@ -219,6 +224,15 @@ public class FrmMantReserva extends javax.swing.JFrame {
         }
         CargarTabla(filtro);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        Reserva r = new Reserva();
+        int row = tabla.getSelectedRow();
+        r = (Reserva)tabla.getValueAt(row, 0);
+        FrmAgregarReserva frm = new FrmAgregarReserva(this, id, e,r);
+        frm.pack();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
         private void eliminar(){
             rbo.eliminar();

@@ -126,5 +126,24 @@ public class ReservaDAO {
         }
     }
     
+    public boolean editar(Reserva r, Cliente c , int id, Empleado e) {
+        try ( Connection con = Conexion.getConexion()) {
+            String sql = "update h.reserva set  fecha_entrada=?, fecha_salida=?, "
+                    + " id_cliente=?, id_habitacion=?, id_empleado=? where id =?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setDate(1,Date.valueOf(r.getFecha_entrada()));
+            stm.setDate(2,Date.valueOf(r.getFecha_salida()));
+            stm.setInt(3, c.getId());
+            stm.setInt(4, id);
+            stm.setInt(5, e.getId());
+            stm.setInt(6, r.getId());
+            return stm.executeUpdate() == 1;
+
+        } catch (Exception ex) {
+            String msj = "Problemas al editar la reserva";
+            throw new RuntimeException(msj);
+        }
+    }
+    
     
 }

@@ -15,11 +15,15 @@ import javax.swing.JFrame;
 public class FrmSeleccionar2 extends javax.swing.JFrame {
 private JFrame parent;
 private Empleado e;
+private int fila;
+private int columna;
     /**
      * Creates new form FrmSeleccionar2
      */
-    public FrmSeleccionar2(JFrame parent, Empleado e) {
+    public FrmSeleccionar2(JFrame parent, Empleado e, int fila, int columna) {
         initComponents();
+        this.fila = fila;
+        this.columna = columna;
         this.parent = parent;
         this.e = e;
         setLocationRelativeTo(parent);
@@ -116,14 +120,14 @@ private Empleado e;
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FrmMantHabitacion frm = new FrmMantHabitacion(this, e);
+        FrmMantHabitacion frm = new FrmMantHabitacion(this, e, fila,columna);
         frm.pack();
         frm.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FrmMantEmpleados frm = new FrmMantEmpleados(this,e);
+        FrmMantEmpleados frm = new FrmMantEmpleados(this);
         frm.pack();
         frm.setVisible(true);
         setVisible(false);

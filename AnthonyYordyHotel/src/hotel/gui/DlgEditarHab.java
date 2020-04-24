@@ -13,21 +13,29 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class DlgAgregarHab extends javax.swing.JDialog {
-private int fila;
-private int columna;
-private int indice;
+public class DlgEditarHab extends javax.swing.JDialog {
+private Habitacion h;
     /**
      * Creates new form DlgAgregarHab
      */
-    public DlgAgregarHab(java.awt.Frame parent, boolean modal, int fila, int columna, int indice) {
+    public DlgEditarHab(java.awt.Frame parent, boolean modal, Habitacion h) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        this.fila = fila;
-        this.columna = columna;
-        this.indice = indice;
+        this.h = h;
+        if (h == null) {
+            this.h = new Habitacion();
+        }else{
+            cargarDatos();
+        }
        
+    }
+    
+    private void cargarDatos(){
+        txtPrecio.setText(String.valueOf(h.getPrecioNoche()));
+        txtCapacidadMax.setText(String.valueOf(h.getCapacidadMax()));
+        txtCapacidadMin.setText(String.valueOf(h.getCapacidadMin()));
+        cbxTipo.setSelectedItem(h.getTipo());
     }
     
     /**
@@ -150,16 +158,11 @@ private int indice;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void destruir(){
-        if ((fila * columna) < indice) {
-            dispose();
-        }
-    }
+    
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            indice++;
-            System.out.println(indice);
+           
             Habitacion h = new Habitacion();
             h.setCapacidadMax(Integer.parseInt(txtCapacidadMax.getText()));
             h.setCapacidadMin(Integer.parseInt(txtCapacidadMin.getText()));
@@ -169,10 +172,10 @@ private int indice;
             h.setDisponible(true);
             if (new HabitacionBO().insertar(h)) {
                 JOptionPane.showMessageDialog(this, "Habitacion Registrada exitosamente");
-                destruir();
                 txtCapacidadMax.setText("");
                 txtCapacidadMin.setText("");
                 txtPrecio.setText("");
+                dispose();
             }
         }catch (RuntimeException ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -183,7 +186,7 @@ private int indice;
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        getParent().setVisible(true);
+        
     }//GEN-LAST:event_formWindowClosed
 
     /**

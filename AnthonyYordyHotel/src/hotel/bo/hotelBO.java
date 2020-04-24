@@ -13,8 +13,20 @@ import hotel.entities.Hotel;
  * @author HP
  */
 public class hotelBO {
-    public Hotel verificar(){
+    public Hotel verHotel(){
         return new hotelDAO().verificar();
     }
-    
+    public boolean insertar(Hotel h){
+            if(h == null){
+        throw new RuntimeException("Debe de crear un hotel");
+            }
+            if (h.getFilas() == 0) {
+            throw new RuntimeException("Los edificios deben de ser mayor a 0 ");
+            }
+            if (h.getColumna() ==0 ) {
+            throw new RuntimeException("Las habitaciones deben de ser mayor a 0 ");
+            
+        }
+            return new hotelDAO().insertar(h);
+    }
 }

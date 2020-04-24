@@ -14,14 +14,21 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class DlgAgregarCliente extends javax.swing.JDialog {
-
+private Cliente c;
     /**
      * Creates new form DlgAgregarCliente
      */
-    public DlgAgregarCliente(java.awt.Frame parent, boolean modal) {
+    public DlgAgregarCliente(java.awt.Frame parent, boolean modal, Cliente c) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        this.c = c;
+        if (c == null) {
+            c = new Cliente();
+        }else{
+            cargarDatos();
+        }
+                
     }
 
     /**
@@ -181,16 +188,24 @@ public class DlgAgregarCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void cargarDatos(){
+        txtCedula.setText(String.valueOf(c.getCedula()));
+        txtCelular.setText(String.valueOf(c.getCelular()));
+        txtCorreo.setText(c.getCorreo());
+        txtNombre.setText(c.getNombre());
+        
+    }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            Cliente c = new Cliente();
+            
             c.setCedula(Integer.parseInt(txtCedula.getText()));
             c.setNombre(txtNombre.getText());
             c.setCorreo(txtCorreo.getText());
             c.setCelular(Integer.parseInt(txtCelular.getText()));
             
             if (new ClienteBO().insertar(c)) {
-                JOptionPane.showMessageDialog(this, "Cliente Registrado exitosamente");
+                JOptionPane.showMessageDialog(this, "Cliente Registrado/editado exitosamente");
                 txtCedula.setText("");
                 txtNombre.setText("");
                 txtCorreo.setText("");
